@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Menu Sample</title>
+    
+    <!-- Google Analytics Tracking Code -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTXHCQCXZC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-BTXHCQCXZC');
+    </script>
+    
     <style>
         body {
             display: flex;
@@ -46,15 +57,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BTXHCQCXZC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-BTXHCQCXZC');
-</script>
 </head>
 <body>
 
@@ -101,10 +103,14 @@
                 ad.style.opacity = 0;
                 revealAdButton.style.display = 'block';
             }, 3000);
+
+            // Track the button tap as an event in Google Analytics
+            gtag('event', 'button_tap', {
+                'event_category': 'User Interaction',
+                'event_label': 'Show Ads Button'
+            });
         }
     </script>
 </body>
 </html>
-
-
 
