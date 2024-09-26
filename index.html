@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -14,14 +15,84 @@
             background-color: #f8f8f8;
         }
         img {
-            max-width: 100%;
+            max-width: 80%;
             height: auto;
             border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #ad {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        #revealAdButton {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
-    <img src="Sample Menu.jpg" alt="Digital Menu">
+
+    <!-- Displaying the menu image -->
+    <img src="Sample Menu.png" alt="Digital Menu">
+
+    <!-- Advertisement section -->
+    <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
+
+    <!-- Button to reveal the ad again -->
+    <button id="revealAdButton" onclick="revealAd()">Show Ads</button>
+
+    <script>
+        window.onload = function() {
+            var ad = document.getElementById('ad');
+            var revealAdButton = document.getElementById('revealAdButton');
+            
+            // Fade in the ad on load
+            ad.style.opacity = 1;
+            
+            // After 3 seconds, fade out the ad
+            setTimeout(function() {
+                ad.style.opacity = 0;
+            }, 3000);
+
+            // Show the button after the ad fades out
+            setTimeout(function() {
+                revealAdButton.style.display = 'block';
+            }, 5000);
+        }
+
+        function revealAd() {
+            var ad = document.getElementById('ad');
+            var revealAdButton = document.getElementById('revealAdButton');
+            
+            // Fade in the ad when the button is clicked
+            ad.style.opacity = 1;
+
+            // Hide the button once the ad is revealed
+            revealAdButton.style.display = 'none';
+
+            // Fade out the ad again after 3 seconds
+            setTimeout(function() {
+                ad.style.opacity = 0;
+                revealAdButton.style.display = 'block';
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
+
