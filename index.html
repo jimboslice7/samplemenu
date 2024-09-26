@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Test</title>
+    <title>Digital Menu Sample</title>
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f8f8;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px; /* Adds space between menu and ad */
+        }
         #ad {
             position: fixed;
             bottom: 0;
@@ -33,15 +49,21 @@
 </head>
 <body>
 
-    <div id="ad">This is a sample advertisement! 20% off at a coffee shop.</div>
-    <button id="revealAdButton" onclick="revealAd()">Show Ad</button>
+    <!-- Displaying the sample menu image -->
+    <img src="Sample%20Menu.png" alt="Digital Menu">
+
+    <!-- Advertisement section -->
+    <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
+
+    <!-- Button to reveal the ad again -->
+    <button id="revealAdButton" onclick="revealAd()">Show Ads</button>
 
     <script>
         window.onload = function() {
             var ad = document.getElementById('ad');
             var revealAdButton = document.getElementById('revealAdButton');
             
-            // Fade in the ad
+            // Fade in the ad on load
             ad.style.opacity = 1;
             
             // After 3 seconds, fade out the ad
@@ -75,5 +97,4 @@
 </body>
 </html>
 
-<!Trigger Redeployment-->
 
