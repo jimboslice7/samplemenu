@@ -30,7 +30,7 @@
             height: auto;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px; /* Adds space between menu and ad */
+            margin-bottom: 20px; /* Adds space between menu and buttons */
         }
         #ad {
             position: fixed;
@@ -43,11 +43,9 @@
             opacity: 0;
             transition: opacity 2s ease-in-out;
         }
-        #revealAdButton {
+        .button {
             display: none;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -55,6 +53,15 @@
             border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 5px;
+        }
+        #exploreNearbyButton {
+            bottom: 70px; /* Position above the other button */
+            right: 20px;
+        }
+        #specialOffersButton {
+            bottom: 20px; /* Position below the other button */
+            right: 20px;
         }
     </style>
 </head>
@@ -66,13 +73,17 @@
     <!-- Advertisement section -->
     <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
 
-    <!-- Button to reveal the ad again -->
-    <button id="revealAdButton" onclick="revealAd()">Show Ads</button>
+    <!-- Button to reveal nearby activities with a map pin icon -->
+    <button id="exploreNearbyButton" class="button" onclick="showExploreNearby()">📍 Explore Nearby</button>
+
+    <!-- Button to reveal special offers with a gift box icon -->
+    <button id="specialOffersButton" class="button" onclick="showSpecialOffers()">🎁 Special Offers</button>
 
     <script>
         window.onload = function() {
             var ad = document.getElementById('ad');
-            var revealAdButton = document.getElementById('revealAdButton');
+            var exploreNearbyButton = document.getElementById('exploreNearbyButton');
+            var specialOffersButton = document.getElementById('specialOffersButton');
             
             // Fade in the ad on load
             ad.style.opacity = 1;
@@ -82,32 +93,26 @@
                 ad.style.opacity = 0;
             }, 3000);
 
-            // Show the button after the ad fades out
+            // Show the buttons after the ad fades out
             setTimeout(function() {
-                revealAdButton.style.display = 'block';
+                exploreNearbyButton.style.display = 'block';
+                specialOffersButton.style.display = 'block';
             }, 5000);
         }
 
-        function revealAd() {
-            var ad = document.getElementById('ad');
-            var revealAdButton = document.getElementById('revealAdButton');
-            
-            // Fade in the ad when the button is clicked
-            ad.style.opacity = 1;
-
-            // Hide the button once the ad is revealed
-            revealAdButton.style.display = 'none';
-
-            // Fade out the ad again after 3 seconds
-            setTimeout(function() {
-                ad.style.opacity = 0;
-                revealAdButton.style.display = 'block';
-            }, 3000);
-
-            // Track the button tap as an event in Google Analytics
+        function showExploreNearby() {
+            alert("Explore Nearby activities and events are displayed here."); // Replace with actual functionality
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
-                'event_label': 'Show Ads Button'
+                'event_label': 'Explore Nearby Button'
+            });
+        }
+
+        function showSpecialOffers() {
+            alert("Special Offers from nearby stores are displayed here."); // Replace with actual functionality
+            gtag('event', 'button_tap', {
+                'event_category': 'User Interaction',
+                'event_label': 'Special Offers Button'
             });
         }
     </script>
