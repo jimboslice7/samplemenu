@@ -32,7 +32,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px; /* Adds space between menu and buttons */
         }
-        #ad {
+        #ad, .popup {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -42,6 +42,20 @@
             padding: 10px;
             opacity: 0;
             transition: opacity 2s ease-in-out;
+        }
+        .popup {
+            top: 20%; /* Position the popup above */
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 80%;
+            height: auto;
+            background-color: white;
+            color: black;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 10;
         }
         .button {
             display: none;
@@ -73,6 +87,26 @@
     <!-- Advertisement section -->
     <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
 
+    <!-- Popup for Explore Nearby -->
+    <div id="explorePopup" class="popup">
+        <h2>Upcoming Events & Activities</h2>
+        <ul>
+            <li>Live Music at Central Park - Friday 8 PM</li>
+            <li>Art Exhibit at City Museum - Saturday 2 PM</li>
+            <li>Farmers Market - Sunday 9 AM - 1 PM</li>
+        </ul>
+    </div>
+
+    <!-- Popup for Local Deals -->
+    <div id="dealsPopup" class="popup">
+        <h2>Local Deals & Discounts</h2>
+        <ul>
+            <li>20% off at Jane's Boutique</li>
+            <li>Buy 1 Get 1 Free Coffee at Joe's Café</li>
+            <li>10% off Sports Gear at SportsHub</li>
+        </ul>
+    </div>
+
     <!-- Button to reveal nearby activities with a map pin icon -->
     <button id="exploreNearbyButton" class="button" onclick="showExploreNearby()">📍 Explore Nearby</button>
 
@@ -101,7 +135,12 @@
         }
 
         function showExploreNearby() {
-            alert("Explore Nearby activities and events are displayed here."); // Replace with actual functionality
+            var explorePopup = document.getElementById('explorePopup');
+            explorePopup.style.opacity = 1; // Display the popup
+            setTimeout(function() {
+                explorePopup.style.opacity = 0; // Hide after 5 seconds
+            }, 5000);
+
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
                 'event_label': 'Explore Nearby Button'
@@ -109,7 +148,12 @@
         }
 
         function showLocalDeals() {
-            alert("Local deals from nearby stores are displayed here."); // Replace with actual functionality
+            var dealsPopup = document.getElementById('dealsPopup');
+            dealsPopup.style.opacity = 1; // Display the popup
+            setTimeout(function() {
+                dealsPopup.style.opacity = 0; // Hide after 5 seconds
+            }, 5000);
+
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
                 'event_label': 'Local Deals Button'
@@ -118,4 +162,5 @@
     </script>
 </body>
 </html>
+
 
