@@ -58,6 +58,7 @@
             padding: 20px;
             z-index: 10;
             pointer-events: auto; /* Ensure clicks can go through to the pop-up */
+            display: none; /* Initially hide popups */
         }
         .button {
             display: none;
@@ -66,32 +67,4 @@
             background-color: #D2B48C; /* Light brown color */
             color: white;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin: 5px;
-            z-index: 15; /* Ensures buttons are on top of other elements */
-        }
-        #exploreNearbyButton {
-            bottom: 20px; /* Position at the bottom left */
-            left: 20px;
-        }
-        #localDealsButton {
-            bottom: 20px; /* Position at the bottom right */
-            right: 20px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Displaying the sample menu image -->
-    <img src="Sample Menu.jpg" alt="Digital Menu">
-
-    <!-- Advertisement section -->
-    <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
-
-    <!-- Popup for Explore Nearby -->
-    <div id="explorePopup" class="p
-
-
-
+            border-rad
