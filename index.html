@@ -67,4 +67,108 @@
             background-color: #D2B48C; /* Light brown color */
             color: white;
             border: none;
-            border-rad
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 5px;
+            z-index: 15; /* Ensures buttons are on top of other elements */
+        }
+        #exploreNearbyButton {
+            bottom: 20px; /* Position at the bottom left */
+            left: 20px;
+        }
+        #localDealsButton {
+            bottom: 20px; /* Position at the bottom right */
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Displaying the sample menu image -->
+    <img src="Sample Menu.jpg" alt="Digital Menu">
+
+    <!-- Advertisement section -->
+    <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
+
+    <!-- Popup for Explore Nearby -->
+    <div id="explorePopup" class="popup">
+        <h2>Upcoming Events & Activities</h2>
+        <ul>
+            <li>Live Music at Central Park - Friday 8 PM</li>
+            <li>Art Exhibit at City Museum - Saturday 2 PM</li>
+            <li>Farmers Market - Sunday 9 AM - 1 PM</li>
+        </ul>
+    </div>
+
+    <!-- Popup for Local Deals -->
+    <div id="dealsPopup" class="popup">
+        <h2>Local Deals & Discounts</h2>
+        <ul>
+            <li>20% off at Jane's Boutique</li>
+            <li>Buy 1 Get 1 Free Coffee at Joe's Café</li>
+            <li>10% off Sports Gear at SportsHub</li>
+        </ul>
+    </div>
+
+    <!-- Button to reveal nearby activities with a map pin icon -->
+    <button id="exploreNearbyButton" class="button" onclick="showExploreNearby()">📍 Explore Nearby</button>
+
+    <!-- Button to reveal local deals with a gift box icon -->
+    <button id="localDealsButton" class="button" onclick="showLocalDeals()">🎁 Local Deals</button>
+
+    <script>
+        window.onload = function() {
+            var ad = document.getElementById('ad');
+            var exploreNearbyButton = document.getElementById('exploreNearbyButton');
+            var localDealsButton = document.getElementById('localDealsButton');
+            
+            // Fade in the ad on load
+            ad.style.opacity = 1;
+            
+            // After 3 seconds, fade out the ad
+            setTimeout(function() {
+                ad.style.opacity = 0;
+            }, 3000);
+
+            // Show the buttons after the ad fades out
+            setTimeout(function() {
+                exploreNearbyButton.style.display = 'block';
+                localDealsButton.style.display = 'block';
+            }, 5000);
+        }
+
+        function showExploreNearby() {
+            var explorePopup = document.getElementById('explorePopup');
+            explorePopup.style.display = 'block';
+            explorePopup.style.opacity = 1; // Display the popup
+
+            setTimeout(function() {
+                explorePopup.style.opacity = 0; // Hide after 5 seconds
+                setTimeout(() => explorePopup.style.display = 'none', 2000); // Completely hide
+            }, 5000);
+
+            gtag('event', 'button_tap', {
+                'event_category': 'User Interaction',
+                'event_label': 'Explore Nearby Button'
+            });
+        }
+
+        function showLocalDeals() {
+            var dealsPopup = document.getElementById('dealsPopup');
+            dealsPopup.style.display = 'block';
+            dealsPopup.style.opacity = 1; // Display the popup
+
+            setTimeout(function() {
+                dealsPopup.style.opacity = 0; // Hide after 5 seconds
+                setTimeout(() => dealsPopup.style.display = 'none', 2000); // Completely hide
+            }, 5000);
+
+            gtag('event', 'button_tap', {
+                'event_category': 'User Interaction',
+                'event_label': 'Local Deals Button'
+            });
+        }
+    </script>
+</body>
+</html>
