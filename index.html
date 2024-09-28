@@ -49,20 +49,39 @@
             pointer-events: none; /* Prevents the ad from blocking clicks */
         }
         .popup {
-            top: 20%; /* Position the popup above */
+            position: fixed;
+            top: 25%; /* Position in the middle third of the screen */
             left: 50%;
-            transform: translate(-50%, 0);
-            width: 80%;
+            transform: translate(-50%, -50%);
+            width: 30%; /* Width takes up one-third of the screen */
             height: auto;
-            background-color: white;
-            color: black;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            background-color: #fffaf0; /* Light beige/brown color */
+            color: #800020; /* Burgundy text color */
+            border: 3px solid #800020; /* Burgundy border */
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 20px;
             z-index: 10;
             pointer-events: auto; /* Ensure clicks can go through to the pop-up */
             display: none; /* Initially hide popups */
+        }
+        .popup h2 {
+            color: #800020; /* Burgundy color for the headers */
+            border-bottom: 2px solid #D2B48C; /* Light brown border under the heading */
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .popup ul {
+            padding: 0;
+            list-style-type: none;
+        }
+        .popup li {
+            margin: 8px 0;
+            background-color: #f0e4d7; /* Light brown highlight for each item */
+            padding: 8px;
+            border-radius: 5px;
+            color: #800020; /* Burgundy text */
         }
         .button {
             display: none;
@@ -154,6 +173,7 @@
                 setTimeout(() => explorePopup.style.display = 'none', 2000); // Completely hide
             }, 3000);
 
+            // Track button tap in Google Analytics
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
                 'event_label': 'Explore Nearby Button'
@@ -170,6 +190,7 @@
                 setTimeout(() => dealsPopup.style.display = 'none', 2000); // Completely hide
             }, 3000);
 
+            // Track button tap in Google Analytics
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
                 'event_label': 'Local Deals Button'
@@ -178,3 +199,4 @@
     </script>
 </body>
 </html>
+
