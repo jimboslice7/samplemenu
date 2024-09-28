@@ -15,6 +15,9 @@
       gtag('config', 'G-BTXHCQCXZC');
     </script>
     
+    <!-- Importing Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             display: flex;
@@ -24,6 +27,7 @@
             height: 100vh;
             margin: 0;
             background-color: #f8f8f8;
+            font-family: 'Cinzel Decorative', cursive; /* Updated font for the entire page */
         }
         img {
             max-width: 80%;
@@ -72,6 +76,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 5px;
             z-index: 15; /* Ensures buttons are on top of other elements */
+            font-family: 'Cinzel Decorative', cursive; /* Apply Italian-styled font */
+            font-size: 16px;
         }
         #exploreNearbyButton {
             bottom: 20px; /* Position at the bottom left */
@@ -144,9 +150,9 @@
             explorePopup.style.opacity = 1; // Display the popup
 
             setTimeout(function() {
-                explorePopup.style.opacity = 0; // Hide after 5 seconds
+                explorePopup.style.opacity = 0; // Hide after 3 seconds
                 setTimeout(() => explorePopup.style.display = 'none', 2000); // Completely hide
-            }, 5000);
+            }, 3000);
 
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
@@ -160,9 +166,9 @@
             dealsPopup.style.opacity = 1; // Display the popup
 
             setTimeout(function() {
-                dealsPopup.style.opacity = 0; // Hide after 5 seconds
+                dealsPopup.style.opacity = 0; // Hide after 3 seconds
                 setTimeout(() => dealsPopup.style.display = 'none', 2000); // Completely hide
-            }, 5000);
+            }, 3000);
 
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
