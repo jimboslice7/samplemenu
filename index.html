@@ -29,12 +29,16 @@
             background-color: #f8f8f8;
             font-family: 'Cinzel Decorative', cursive; /* Updated font for the entire page */
         }
-        img {
+        .menu-page {
+            display: none;
             max-width: 80%;
             height: auto;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px; /* Adds space between menu and buttons */
+        }
+        #page1 {
+            display: block; /* Display the first page by default */
         }
         #ad, .popup {
             position: fixed;
@@ -106,12 +110,22 @@
             bottom: 20px; /* Position at the bottom right */
             right: 20px;
         }
+        .nav-buttons {
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Displaying the sample menu image -->
-    <img src="SampleToastMenu.pdf" alt="Digital Menu">
+    <!-- Displaying the two pages of the menu -->
+    <img id="page1" class="menu-page" src="SampleToastMenu1.jpg" alt="Digital Menu Page 1">
+    <img id="page2" class="menu-page" src="SampleToastMenu2.jpg" alt="Digital Menu Page 2">
+
+    <!-- Navigation buttons to switch between pages -->
+    <div class="nav-buttons">
+        <button onclick="showPage(1)">Page 1</button>
+        <button onclick="showPage(2)">Page 2</button>
+    </div>
 
     <!-- Advertisement section -->
     <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
@@ -163,6 +177,14 @@
             }, 5000);
         }
 
+        function showPage(pageNumber) {
+            // Hide all pages
+            document.querySelectorAll('.menu-page').forEach(page => page.style.display = 'none');
+            
+            // Show the selected page
+            document.getElementById('page' + pageNumber).style.display = 'block';
+        }
+
         function showExploreNearby() {
             var explorePopup = document.getElementById('explorePopup');
             explorePopup.style.display = 'block';
@@ -199,4 +221,7 @@
     </script>
 </body>
 </html>
+
+       
+
 
