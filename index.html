@@ -35,6 +35,18 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px; /* Adds space between the menu and any other content */
         }
+        #ad {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            z-index: 10; /* Ensure the ad is above other elements */
+        }
         .popup {
             position: fixed;
             top: 25%; /* Position in the middle third of the screen */
@@ -48,7 +60,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            z-index: 10;
+            z-index: 15;
             pointer-events: auto; /* Ensure clicks can go through to the pop-up */
             display: none; /* Initially hide popups */
         }
@@ -97,16 +109,19 @@
 </head>
 <body>
 
-    <!-- Displaying the combined menu image -->
-    <img id="menu-image" src="SampleToastMenu.pdf" alt="Digital Menu">
+    <!-- Displaying the combined menu image (ensure it's a single image file) -->
+    <img id="menu-image" src="SampleToastMenu.jpg" alt="Digital Menu">
+
+    <!-- Advertisement section that pops up initially -->
+    <div id="ad">Special Offer: 20% off mimosa flights!</div>
 
     <!-- Popup for Explore Nearby -->
     <div id="explorePopup" class="popup">
         <h2>Upcoming Events & Activities</h2>
         <ul>
-            <li>Live Music at Central Park - Friday 8 PM</li>
-            <li>Art Exhibit at City Museum - Saturday 2 PM</li>
-            <li>Farmers Market - Sunday 9 AM - 1 PM</li>
+            <li>Jazz Music at Cameron Art Museum - Friday 8 PM</li>
+            <li>Cyrstal Pier Sunrise Yoga - Saturday 5 AM</li>
+            <li>Wrightsville Beach Farmers Market - Sunday 9 AM - 1 PM</li>
         </ul>
     </div>
 
@@ -128,14 +143,23 @@
 
     <script>
         window.onload = function() {
+            var ad = document.getElementById('ad');
             var exploreNearbyButton = document.getElementById('exploreNearbyButton');
             var localDealsButton = document.getElementById('localDealsButton');
             
-            // Show the buttons after the page loads
+            // Fade in the ad on load
+            ad.style.opacity = 1;
+            
+            // After 3 seconds, fade out the ad
+            setTimeout(function() {
+                ad.style.opacity = 0;
+            }, 3000);
+
+            // Show the buttons after the ad fades out
             setTimeout(function() {
                 exploreNearbyButton.style.display = 'block';
                 localDealsButton.style.display = 'block';
-            }, 2000);
+            }, 5000);
         }
 
         function showExploreNearby() {
