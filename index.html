@@ -22,35 +22,18 @@
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
             background-color: #f8f8f8;
             font-family: 'Cinzel Decorative', cursive; /* Updated font for the entire page */
+            padding: 20px; /* Add padding to make scrolling feel smoother */
         }
-        .menu-page {
-            display: none;
+        #menu-image {
             max-width: 80%;
             height: auto;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px; /* Adds space between menu and buttons */
-        }
-        #page1 {
-            display: block; /* Display the first page by default */
-        }
-        #ad, .popup {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-            pointer-events: none; /* Prevents the ad from blocking clicks */
+            margin-bottom: 20px; /* Adds space between the menu and any other content */
         }
         .popup {
             position: fixed;
@@ -110,25 +93,12 @@
             bottom: 20px; /* Position at the bottom right */
             right: 20px;
         }
-        .nav-buttons {
-            margin: 10px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Displaying the two pages of the menu -->
-    <img id="page1" class="menu-page" src="SampleToastMenu1.pdf" alt="Digital Menu Page 1">
-    <img id="page2" class="menu-page" src="SampleToastMenu2.pdf" alt="Digital Menu Page 2">
-
-    <!-- Navigation buttons to switch between pages -->
-    <div class="nav-buttons">
-        <button onclick="showPage(1)">Page 1</button>
-        <button onclick="showPage(2)">Page 2</button>
-    </div>
-
-    <!-- Advertisement section -->
-    <div id="ad">Special Offer: 20% off at a local coffee shop! Visit the Art Museum Today!</div>
+    <!-- Displaying the combined menu image -->
+    <img id="menu-image" src="FullMenu.jpg" alt="Digital Menu">
 
     <!-- Popup for Explore Nearby -->
     <div id="explorePopup" class="popup">
@@ -158,31 +128,14 @@
 
     <script>
         window.onload = function() {
-            var ad = document.getElementById('ad');
             var exploreNearbyButton = document.getElementById('exploreNearbyButton');
             var localDealsButton = document.getElementById('localDealsButton');
             
-            // Fade in the ad on load
-            ad.style.opacity = 1;
-            
-            // After 3 seconds, fade out the ad
-            setTimeout(function() {
-                ad.style.opacity = 0;
-            }, 3000);
-
-            // Show the buttons after the ad fades out
+            // Show the buttons after the page loads
             setTimeout(function() {
                 exploreNearbyButton.style.display = 'block';
                 localDealsButton.style.display = 'block';
-            }, 5000);
-        }
-
-        function showPage(pageNumber) {
-            // Hide all pages
-            document.querySelectorAll('.menu-page').forEach(page => page.style.display = 'none');
-            
-            // Show the selected page
-            document.getElementById('page' + pageNumber).style.display = 'block';
+            }, 2000);
         }
 
         function showExploreNearby() {
@@ -221,6 +174,7 @@
     </script>
 </body>
 </html>
+
 
        
 
