@@ -33,8 +33,8 @@
             background-color: #f8f8f8;
             font-family: 'Cinzel Decorative', cursive;
             padding: 20px;
-            height: 100vh; /* Ensures body takes up full height */
-            overflow: hidden; /* Prevents scrolling */
+            height: 100vh;
+            overflow: hidden;
         }
         #menu-image {
             max-width: 80%;
@@ -57,22 +57,22 @@
         }
         .popup {
             position: fixed;
-            bottom: -300px; /* Hidden off-screen initially */
-            left: 0;
-            width: 100%;
+            bottom: -100%; /* Hidden off-screen initially */
+            left: 50%; /* Start from the center horizontally */
+            transform: translate(-50%, 100%); /* Translate to be off the screen */
+            width: 80%; /* Adjust the width as needed */
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
-            border-radius: 15px 15px 0 0;
+            border-radius: 15px;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
             padding: 20px;
             z-index: 15;
             pointer-events: none;
             transition: transform 0.5s ease;
-            transform: translateY(100%); /* Positioned off-screen */
         }
         .popup.visible {
-            transform: translateY(0); /* Slides the popup into view */
+            transform: translate(-50%, -50%); /* Position it in the middle of the screen */
             pointer-events: auto;
         }
         .popup h2 {
@@ -175,13 +175,14 @@
 
         function togglePopup(popupId) {
             var popup = document.getElementById(popupId);
+            console.log(`Button clicked for ${popupId}`); // Debugging log
 
             if (popup.classList.contains('visible')) {
                 // Slide the popup back down
                 popup.classList.remove('visible');
             } else {
-                // Slide the popup up
-                document.querySelectorAll('.popup').forEach(el => el.classList.remove('visible')); // Hide other popups
+                // Hide other popups and slide this one up
+                document.querySelectorAll('.popup').forEach(el => el.classList.remove('visible'));
                 popup.classList.add('visible');
             }
 
