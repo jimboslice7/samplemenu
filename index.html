@@ -69,10 +69,11 @@
             padding: 20px;
             z-index: 15;
             pointer-events: none;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, bottom 0.5s ease;
         }
         .popup.visible {
-            transform: translate(-50%, -50%); /* Position it in the middle of the screen */
+            bottom: 30%; /* Adjust this value to control how far up the popup slides */
+            transform: translate(-50%, 0); /* Place the popup in the visible area */
             pointer-events: auto;
         }
         .popup h2 {
@@ -180,10 +181,15 @@
             if (popup.classList.contains('visible')) {
                 // Slide the popup back down
                 popup.classList.remove('visible');
+                popup.style.transform = "translate(-50%, 100%)"; // Move it back down
             } else {
                 // Hide other popups and slide this one up
-                document.querySelectorAll('.popup').forEach(el => el.classList.remove('visible'));
+                document.querySelectorAll('.popup').forEach(el => {
+                    el.classList.remove('visible');
+                    el.style.transform = "translate(-50%, 100%)"; // Move others down
+                });
                 popup.classList.add('visible');
+                popup.style.transform = "translate(-50%, 0)"; // Slide up into view
             }
 
             // Track button taps in Google Analytics
