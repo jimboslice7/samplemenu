@@ -31,15 +31,17 @@
             align-items: center;
             margin: 0;
             background-color: #f8f8f8;
-            font-family: 'Cinzel Decorative', cursive; /* Updated font for the entire page */
-            padding: 20px; /* Add padding to make scrolling feel smoother */
+            font-family: 'Cinzel Decorative', cursive;
+            padding: 20px;
+            height: 100vh; /* Ensures body takes up full height */
+            overflow: hidden; /* Prevents scrolling */
         }
         #menu-image {
             max-width: 80%;
             height: auto;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px; /* Adds space between the menu and any other content */
+            margin-bottom: 20px;
         }
         #ad {
             position: fixed;
@@ -51,28 +53,31 @@
             padding: 10px;
             opacity: 0;
             transition: opacity 2s ease-in-out;
-            z-index: 10; /* Ensure the ad is above other elements */
+            z-index: 10;
         }
         .popup {
             position: fixed;
-            top: 25%; /* Position in the middle third of the screen */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30%; /* Width takes up one-third of the screen */
-            height: auto;
-            background-color: #fffaf0; /* Light beige/brown color */
-            color: #800020; /* Burgundy text color */
-            border: 3px solid #800020; /* Burgundy border */
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            bottom: -300px; /* Hidden off-screen initially */
+            left: 0;
+            width: 100%;
+            background-color: #fffaf0;
+            color: #800020;
+            border: 3px solid #800020;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
             padding: 20px;
             z-index: 15;
-            pointer-events: auto; /* Ensure clicks can go through to the pop-up */
-            display: none; /* Initially hide popups */
+            pointer-events: none;
+            transition: transform 0.5s ease;
+            transform: translateY(100%); /* Positioned off-screen */
+        }
+        .popup.visible {
+            transform: translateY(0); /* Slides the popup into view */
+            pointer-events: auto;
         }
         .popup h2 {
-            color: #800020; /* Burgundy color for the headers */
-            border-bottom: 2px solid #D2B48C; /* Light brown border under the heading */
+            color: #800020;
+            border-bottom: 2px solid #D2B48C;
             padding-bottom: 5px;
             margin-bottom: 10px;
             text-align: center;
@@ -83,39 +88,39 @@
         }
         .popup li {
             margin: 8px 0;
-            background-color: #f0e4d7; /* Light brown highlight for each item */
+            background-color: #f0e4d7;
             padding: 8px;
             border-radius: 5px;
-            color: #800020; /* Burgundy text */
+            color: #800020;
         }
         .button {
             display: none;
             position: fixed;
             padding: 10px 20px;
-            background-color: #D2B48C; /* Light brown color */
+            background-color: #D2B48C;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 5px;
-            z-index: 15; /* Ensures buttons are on top of other elements */
-            font-family: 'Cinzel Decorative', cursive; /* Apply Italian-styled font */
+            z-index: 20;
+            font-family: 'Cinzel Decorative', cursive;
             font-size: 16px;
         }
         #exploreNearbyButton {
-            bottom: 20px; /* Position at the bottom left */
+            bottom: 20px;
             left: 20px;
         }
         #localDealsButton {
-            bottom: 20px; /* Position at the bottom right */
+            bottom: 20px;
             right: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Displaying the combined menu image (ensure it's a single image file) -->
+    <!-- Displaying the combined menu image -->
     <img id="menu-image" src="SampleToastMenu.jpg" alt="Digital Menu">
 
     <!-- Advertisement section that pops up initially -->
@@ -141,11 +146,11 @@
         </ul>
     </div>
 
-    <!-- Button to reveal nearby activities with a map pin icon -->
-    <button id="exploreNearbyButton" class="button" onclick="showExploreNearby()">📍 Explore Nearby</button>
+    <!-- Button to reveal nearby activities -->
+    <button id="exploreNearbyButton" class="button" onclick="togglePopup('explorePopup')">📍 Explore Nearby</button>
 
-    <!-- Button to reveal local deals with a gift box icon -->
-    <button id="localDealsButton" class="button" onclick="showLocalDeals()">🎁 Local Deals</button>
+    <!-- Button to reveal local deals -->
+    <button id="localDealsButton" class="button" onclick="togglePopup('dealsPopup')">🎁 Local Deals</button>
 
     <script>
         window.onload = function() {
@@ -168,37 +173,22 @@
             }, 5000);
         }
 
-        function showExploreNearby() {
-            var explorePopup = document.getElementById('explorePopup');
-            explorePopup.style.display = 'block';
-            explorePopup.style.opacity = 1; // Display the popup
+        function togglePopup(popupId) {
+            var popup = document.getElementById(popupId);
 
-            setTimeout(function() {
-                explorePopup.style.opacity = 0; // Hide after 3 seconds
-                setTimeout(() => explorePopup.style.display = 'none', 2000); // Completely hide
-            }, 3000);
+            if (popup.classList.contains('visible')) {
+                // Slide the popup back down
+                popup.classList.remove('visible');
+            } else {
+                // Slide the popup up
+                document.querySelectorAll('.popup').forEach(el => el.classList.remove('visible')); // Hide other popups
+                popup.classList.add('visible');
+            }
 
-            // Track button tap in Google Analytics
+            // Track button taps in Google Analytics
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
-                'event_label': 'Explore Nearby Button'
-            });
-        }
-
-        function showLocalDeals() {
-            var dealsPopup = document.getElementById('dealsPopup');
-            dealsPopup.style.display = 'block';
-            dealsPopup.style.opacity = 1; // Display the popup
-
-            setTimeout(function() {
-                dealsPopup.style.opacity = 0; // Hide after 3 seconds
-                setTimeout(() => dealsPopup.style.display = 'none', 2000); // Completely hide
-            }, 3000);
-
-            // Track button tap in Google Analytics
-            gtag('event', 'button_tap', {
-                'event_category': 'User Interaction',
-                'event_label': 'Local Deals Button'
+                'event_label': popupId === 'explorePopup' ? 'Explore Nearby Button' : 'Local Deals Button'
             });
         }
     </script>
