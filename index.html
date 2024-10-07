@@ -101,7 +101,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .button {
-            display: none;
+            display: none; /* Initially hide buttons */
             position: fixed;
             display: flex;
             align-items: center;
@@ -188,11 +188,11 @@
                 ad.style.opacity = 0;
             }, 3000);
 
-            // Show the buttons 3 seconds after the ad fully fades out
+            // Show the buttons after the ad fades out
             setTimeout(function() {
                 exploreNearbyButton.style.display = 'flex';
                 localDealsButton.style.display = 'flex';
-            }, 6000); // 6-second total delay to show buttons after the ad fades out
+            }, 6000); // 6-second delay to show buttons after the ad fades out
         }
 
         function togglePopup(popupId, button) {
