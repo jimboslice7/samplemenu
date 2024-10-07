@@ -104,6 +104,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .button {
+            display: none; /* Initially hide buttons */
             position: fixed;
             padding: 15px 20px;
             background-color: #D2B48C;
@@ -130,7 +131,7 @@
 <body>
 
     <!-- Displaying the combined menu image -->
-    <img id="menu-image" src="SampleBrunchMenu.jpg" alt="Brunch Menu">
+    <img id="menu-image" src="SampleToastMenu.jpg" alt="Brunch Menu">
 
     <!-- Advertisement section that pops up initially -->
     <div id="ad">Special Offer: 20% off mimosa flights!</div>
@@ -179,7 +180,7 @@
             setTimeout(function() {
                 exploreNearbyButton.style.display = 'block';
                 localDealsButton.style.display = 'block';
-            }, 6000); // Delay buttons to allow the banner to be visible first
+            }, 5000); // 5-second delay to show the buttons after the ad fades out
         }
 
         function togglePopup(popupId) {
