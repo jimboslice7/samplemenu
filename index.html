@@ -44,10 +44,11 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 20px; /* Increased padding for larger banner */
+            font-size: 18px; /* Increased font size for visibility */
             opacity: 0;
             transition: opacity 2s ease-in-out;
             z-index: 10;
@@ -86,21 +87,20 @@
         }
         .popup li {
             margin: 8px 0;
-            background-color: #f0e4d7;
-            padding: 8px;
-            border-radius: 5px;
-            color: #800020;
+            display: flex;
+            justify-content: center;
         }
         .link-button {
             display: inline-block;
             padding: 10px 15px;
-            margin-top: 10px;
             background-color: #D2B48C;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .button {
             position: fixed;
@@ -138,9 +138,9 @@
     <div id="explorePopup" class="popup">
         <h2>Upcoming Events & Activities</h2>
         <ul>
-            <li><a href="https://www.cameronartmuseum.org/" target="_blank">Jazz Music at Cameron Art Museum - Friday 8 PM</a></li>
-            <li><a href="https://www.crystalpier.com/" target="_blank">Crystal Pier Sunrise Yoga - Saturday 5 AM</a></li>
-            <li><a href="https://www.wilmingtondowntown.com/events/wrightsville-beach-farmers-market" target="_blank">Wrightsville Beach Farmers Market - Sunday 9 AM - 1 PM</a></li>
+            <li><button onclick="window.open('https://www.cameronartmuseum.org/', '_blank')" class="link-button">Jazz Music at Cameron Art Museum - Friday 8 PM</button></li>
+            <li><button onclick="window.open('https://www.crystalpier.com/', '_blank')" class="link-button">Crystal Pier Sunrise Yoga - Saturday 5 AM</button></li>
+            <li><button onclick="window.open('https://www.wilmingtondowntown.com/events/wrightsville-beach-farmers-market', '_blank')" class="link-button">Wrightsville Beach Farmers Market - Sunday 9 AM - 1 PM</button></li>
         </ul>
     </div>
 
@@ -148,9 +148,9 @@
     <div id="dealsPopup" class="popup">
         <h2>Local Deals & Discounts</h2>
         <ul>
-            <li>20% off at Jane's Boutique</li>
-            <li>Buy 1 Get 1 Free Coffee at Joe's Café</li>
-            <li>10% off Sports Gear at SportsHub</li>
+            <li><button onclick="window.open('https://example.com/janes-boutique', '_blank')" class="link-button">20% off at Jane's Boutique</button></li>
+            <li><button onclick="window.open('https://example.com/joes-cafe', '_blank')" class="link-button">Buy 1 Get 1 Free Coffee at Joe's Café</button></li>
+            <li><button onclick="window.open('https://example.com/sportshub', '_blank')" class="link-button">10% off Sports Gear at SportsHub</button></li>
         </ul>
     </div>
 
@@ -178,7 +178,7 @@
             setTimeout(function() {
                 exploreNearbyButton.style.display = 'block';
                 localDealsButton.style.display = 'block';
-            }, 5000);
+            }, 6000); // Delay buttons to allow the banner to be visible first
         }
 
         function togglePopup(popupId) {
