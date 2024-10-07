@@ -113,10 +113,10 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: background-color 0.3s ease; /* Transition for active effect */
+            transition: background-color 0.3s ease;
         }
         .button.active {
-            background-color: #b08b60; /* Slightly darker shade when active */
+            background-color: #b08b60;
         }
         #exploreNearbyButton {
             bottom: 20px;
@@ -125,6 +125,12 @@
         #localDealsButton {
             bottom: 20px;
             right: 20px;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -157,10 +163,14 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button" onclick="togglePopup('explorePopup', this)">📍 Explore Nearby</button>
+    <button id="exploreNearbyButton" class="button" onclick="togglePopup('explorePopup', this)">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/pin.png" alt="Map Pin" class="icon"> Explore Nearby
+    </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button" onclick="togglePopup('dealsPopup', this)">🎁 Local Deals</button>
+    <button id="localDealsButton" class="button" onclick="togglePopup('dealsPopup', this)">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> Local Deals
+    </button>
 
     <script>
         window.onload = function() {
@@ -209,12 +219,12 @@
         }
 
         function trackAndOpen(url, label) {
-            // Track click event in Google Analytics
-            gtag('event', 'click', {
-                'event_category': 'External Link Click',
-                'event_label': label,
-                'transport_type': 'beacon'
+            // Track the click event
+            gtag('event', 'link_click', {
+                'event_category': 'Link Interaction',
+                'event_label': label
             });
+
             // Open the URL in a new tab
             window.open(url, '_blank');
         }
