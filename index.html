@@ -102,23 +102,45 @@
             font-weight: bold;
             cursor: pointer;
         }
+        .button {
+            position: fixed;
+            padding: 10px 20px;
+            background-color: #D2B48C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 20;
+        }
+        #exploreNearbyButton {
+            bottom: 20px;
+            left: 20px;
+        }
+        #localDealsButton {
+            bottom: 20px;
+            right: 20px;
+        }
     </style>
 </head>
 <body>
 
     <!-- Displaying the combined menu image -->
-    <img id="menu-image" src="SampleBrunchMenu.jpg" alt="Brunch Menu">
+    <img id="menu-image" src="SampleToastMenu.jpg" alt="Brunch Menu">
 
     <!-- Advertisement section that pops up initially -->
-    <div id="ad">SPECIAL OFFER: 20% OFF MIMOSA FLIGHTS!</div>
+    <div id="ad">Special Offer: 20% off mimosa flights!</div>
 
     <!-- Popup for Explore Nearby -->
     <div id="explorePopup" class="popup">
         <h2>Upcoming Events & Activities</h2>
         <ul>
-            <li><a href="https://cameronartmuseum.org/events/" target="_blank">Jazz Music at Cameron Art Museum - Friday 8 PM</a></li>
-            <li><a href="https://www.wilmingtonandbeaches.com/event/be-salty%3A-crystal-pier-yoga/7674/" target="_blank">Crystal Pier Sunrise Yoga - Saturday from 5 AM - 6AM</a></li>
-            <li><a href="https://www.wilmingtondowntown.com/events/wrightsville-beach-farmers-market" target="_blank">Wrightsville Beach Farmers Market - Sunday from 9 AM - 1 PM</a></li>
+            <li><a href="https://www.cameronartmuseum.org/" target="_blank">Jazz Music at Cameron Art Museum - Friday 8 PM</a></li>
+            <li><a href="https://www.crystalpier.com/" target="_blank">Crystal Pier Sunrise Yoga - Saturday 5 AM</a></li>
+            <li><a href="https://www.wilmingtondowntown.com/events/wrightsville-beach-farmers-market" target="_blank">Wrightsville Beach Farmers Market - Sunday 9 AM - 1 PM</a></li>
         </ul>
     </div>
 
