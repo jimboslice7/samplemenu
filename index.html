@@ -188,11 +188,11 @@
                 ad.style.opacity = 0;
             }, 3000);
 
-            // Show the buttons after the ad fades out
+            // Show the buttons 6 seconds after the ad fully fades out
             setTimeout(function() {
                 exploreNearbyButton.style.display = 'flex';
                 localDealsButton.style.display = 'flex';
-            }, 6000); // 6-second delay to show buttons after the ad fades out
+            }, 6000); // 6-second total delay to show buttons after the ad fades out
         }
 
         function togglePopup(popupId, button) {
