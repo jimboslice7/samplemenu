@@ -101,7 +101,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .button {
-            opacity: 0; /* Initially hide buttons */
+            display: none;
             position: fixed;
             display: flex;
             align-items: center;
@@ -116,7 +116,7 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: background-color 0.3s ease, opacity 1s ease;
+            transition: background-color 0.3s ease;
         }
         .button.active {
             background-color: #b08b60;
@@ -124,10 +124,12 @@
         #exploreNearbyButton {
             bottom: 20px;
             left: 20px;
+            width: 200px; /* Set fixed width for both buttons */
         }
         #localDealsButton {
             bottom: 20px;
             right: 20px;
+            width: 200px; /* Set fixed width for both buttons */
         }
         .icon {
             width: 20px;
@@ -188,11 +190,9 @@
                 ad.style.opacity = 0;
             }, 3000);
 
-            // Show the buttons 3 seconds after the ad fades out
+            // Show the buttons 3 seconds after the ad fully fades out
             setTimeout(function() {
-                exploreNearbyButton.style.opacity = 1;
                 exploreNearbyButton.style.display = 'flex';
-                localDealsButton.style.opacity = 1;
                 localDealsButton.style.display = 'flex';
             }, 6000); // 6-second total delay to show buttons after the ad fades out
         }
