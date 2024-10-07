@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Menu Sample</title>
+    <title>Brunch Menu Sample</title>
     
     <!-- Open Graph Metadata for NFC Popup -->
-    <meta property="og:title" content="Famous Toastery Menu" />
-    <meta property="og:description" content="Tap to explore the Famous Toastery's digital menu, special offers, and nearby activities!" />
+    <meta property="og:title" content="Brunch Place Menu" />
+    <meta property="og:description" content="Tap to explore our brunch menu, special offers, and nearby activities!" />
     <meta property="og:url" content="https://jimboslice7.github.io/samplemenu/" />
-    <meta property="og:image" content="https://jimboslice7.github.io/samplemenu/toasticon" />
+    <meta property="og:image" content="https://jimboslice7.github.io/samplemenu/toasticon.png" />
     
     <!-- Google Analytics Tracking Code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTXHCQCXZC"></script>
@@ -20,9 +20,6 @@
     
       gtag('config', 'G-BTXHCQCXZC');
     </script>
-    
-    <!-- Importing Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -57,10 +54,10 @@
         }
         .popup {
             position: fixed;
-            bottom: -100%; /* Hidden off-screen initially */
-            left: 50%; /* Start from the center horizontally */
-            transform: translate(-50%, 100%); /* Translate to be off the screen */
-            width: 80%; /* Adjust the width as needed */
+            bottom: -100%;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            width: 80%;
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -72,8 +69,8 @@
             transition: transform 0.5s ease, bottom 0.5s ease;
         }
         .popup.visible {
-            bottom: 30%; /* Adjust this value to control how far up the popup slides */
-            transform: translate(-50%, 0); /* Place the popup in the visible area */
+            bottom: 30%;
+            transform: translate(-50%, 0);
             pointer-events: auto;
         }
         .popup h2 {
@@ -94,46 +91,34 @@
             border-radius: 5px;
             color: #800020;
         }
-        .button {
-            display: none;
-            position: fixed;
-            padding: 10px 20px;
+        .link-button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-top: 10px;
             background-color: #D2B48C;
             color: white;
-            border: none;
+            text-decoration: none;
             border-radius: 5px;
+            font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin: 5px;
-            z-index: 20;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            font-size: 16px;
-        }
-        #exploreNearbyButton {
-            bottom: 20px;
-            left: 20px;
-        }
-        #localDealsButton {
-            bottom: 20px;
-            right: 20px;
         }
     </style>
 </head>
 <body>
 
     <!-- Displaying the combined menu image -->
-    <img id="menu-image" src="SampleToastMenu.pdf" alt="Digital Menu">
+    <img id="menu-image" src="SampleBrunchMenu.jpg" alt="Brunch Menu">
 
     <!-- Advertisement section that pops up initially -->
-    <div id="ad">Special Offer: 20% off mimosa flights!</div>
+    <div id="ad">SPECIAL OFFER: 20% OFF MIMOSA FLIGHTS!</div>
 
     <!-- Popup for Explore Nearby -->
     <div id="explorePopup" class="popup">
-        <h2>Nearby Events & Activities</h2>
+        <h2>Upcoming Events & Activities</h2>
         <ul>
-            <li>Jazz Music at Cameron Art Museum - Friday 8 PM</li>
-            <li>Crystal Pier Sunrise Yoga - Saturday 5 AM</li>
-            <li>Wrightsville Beach Farmers Market - Sunday 9 AM - 1 PM</li>
+            <li><a href="https://cameronartmuseum.org/events/" target="_blank">Jazz Music at Cameron Art Museum - Friday 8 PM</a></li>
+            <li><a href="https://www.wilmingtonandbeaches.com/event/be-salty%3A-crystal-pier-yoga/7674/" target="_blank">Crystal Pier Sunrise Yoga - Saturday from 5 AM - 6AM</a></li>
+            <li><a href="https://www.wilmingtondowntown.com/events/wrightsville-beach-farmers-market" target="_blank">Wrightsville Beach Farmers Market - Sunday from 9 AM - 1 PM</a></li>
         </ul>
     </div>
 
@@ -141,9 +126,9 @@
     <div id="dealsPopup" class="popup">
         <h2>Local Deals & Discounts</h2>
         <ul>
-            <li>20% off Swimsuits at South End Surf Shop</li>
-            <li>Buy 1 Get 1 Free Coffee at SUNdays</li>
-            <li>10% off Pants at Hallelu Clothing Boutique</li>
+            <li>20% off at Jane's Boutique</li>
+            <li>Buy 1 Get 1 Free Coffee at Joe's Café</li>
+            <li>10% off Sports Gear at SportsHub</li>
         </ul>
     </div>
 
@@ -176,20 +161,16 @@
 
         function togglePopup(popupId) {
             var popup = document.getElementById(popupId);
-            console.log(`Button clicked for ${popupId}`); // Debugging log
-
             if (popup.classList.contains('visible')) {
-                // Slide the popup back down
                 popup.classList.remove('visible');
-                popup.style.transform = "translate(-50%, 100%)"; // Move it back down
+                popup.style.transform = "translate(-50%, 100%)";
             } else {
-                // Hide other popups and slide this one up
                 document.querySelectorAll('.popup').forEach(el => {
                     el.classList.remove('visible');
-                    el.style.transform = "translate(-50%, 100%)"; // Move others down
+                    el.style.transform = "translate(-50%, 100%)";
                 });
                 popup.classList.add('visible');
-                popup.style.transform = "translate(-50%, 0)"; // Slide up into view
+                popup.style.transform = "translate(-50%, 0)";
             }
 
             // Track button taps in Google Analytics
@@ -201,7 +182,6 @@
     </script>
 </body>
 </html>
-
 
        
 
