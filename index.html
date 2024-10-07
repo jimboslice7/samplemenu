@@ -105,6 +105,7 @@
             position: fixed;
             display: flex;
             align-items: center;
+            justify-content: center;
             padding: 15px 20px;
             background-color: #D2B48C;
             color: white;
@@ -116,9 +117,6 @@
             font-weight: bold;
             z-index: 20;
             transition: background-color 0.3s ease;
-        }
-        .button img {
-            margin-right: 10px;
         }
         .button.active {
             background-color: #b08b60;
@@ -134,7 +132,6 @@
         .icon {
             width: 20px;
             height: 20px;
-            vertical-align: middle;
             margin-right: 8px;
         }
     </style>
@@ -169,12 +166,12 @@
 
     <!-- Button to reveal nearby activities -->
     <button id="exploreNearbyButton" class="button" onclick="togglePopup('explorePopup', this)">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> Explore Nearby
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span>Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
     <button id="localDealsButton" class="button" onclick="togglePopup('dealsPopup', this)">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> Local Deals
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span>Local Deals</span>
     </button>
 
     <script>
@@ -193,8 +190,8 @@
 
             // Show the buttons after the ad fades out
             setTimeout(function() {
-                exploreNearbyButton.style.display = 'block';
-                localDealsButton.style.display = 'block';
+                exploreNearbyButton.style.display = 'flex';
+                localDealsButton.style.display = 'flex';
             }, 5000);
         }
 
@@ -236,6 +233,8 @@
     </script>
 </body>
 </html>
+
+
 
 
        
