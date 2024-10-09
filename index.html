@@ -127,7 +127,7 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease, transform 1s ease, width 1s ease, left 1s ease, right 1s ease, bottom 1s ease;
+            transition: opacity 1s ease, transform 0.5s ease, width 0.5s ease;
         }
         .button.disabled {
             pointer-events: none; /* Disable interaction */
@@ -135,6 +135,7 @@
         .button.shrunk {
             width: 50px;
             padding: 15px;
+            transform: translate(0, 0) scale(0.5); /* Scale down smoothly */
             justify-content: center;
         }
         .button .text {
@@ -226,13 +227,11 @@
             // After 3 more seconds, shrink and slide buttons to corners, and enable them
             setTimeout(function() {
                 exploreNearbyButton.classList.add('shrunk');
-                exploreNearbyButton.style.left = '10px';
-                exploreNearbyButton.style.bottom = '10px';
+                exploreNearbyButton.style.transform = 'translate(-20px, -10px) scale(0.5)';
                 exploreNearbyButton.classList.remove('disabled');
                 
                 localDealsButton.classList.add('shrunk');
-                localDealsButton.style.right = '10px';
-                localDealsButton.style.bottom = '10px';
+                localDealsButton.style.transform = 'translate(20px, -10px) scale(0.5)';
                 localDealsButton.classList.remove('disabled');
             }, 9000);
         }
@@ -244,9 +243,7 @@
             // If the other button is expanded, shrink it and hide its popup
             if (!otherButton.classList.contains('shrunk')) {
                 otherButton.classList.add('shrunk');
-                otherButton.style.left = otherButtonId === 'exploreNearbyButton' ? '10px' : '';
-                otherButton.style.right = otherButtonId === 'localDealsButton' ? '10px' : '';
-                otherButton.style.bottom = '10px';
+                otherButton.style.transform = 'translate(' + (otherButtonId === 'exploreNearbyButton' ? '-20px' : '20px') + ', -10px) scale(0.5)';
                 togglePopup(otherPopupId, false);
             }
 
@@ -254,15 +251,11 @@
             var isShrunk = button.classList.contains('shrunk');
             if (isShrunk) {
                 button.classList.remove('shrunk');
-                button.style.left = buttonId === 'exploreNearbyButton' ? '20px' : '';
-                button.style.right = buttonId === 'localDealsButton' ? '20px' : '';
-                button.style.bottom = '20px';
+                button.style.transform = 'translate(0, 0) scale(1)';
                 togglePopup(popupId, true);
             } else {
                 button.classList.add('shrunk');
-                button.style.left = buttonId === 'exploreNearbyButton' ? '10px' : '';
-                button.style.right = buttonId === 'localDealsButton' ? '10px' : '';
-                button.style.bottom = '10px';
+                button.style.transform = 'translate(' + (buttonId === 'exploreNearbyButton' ? '-20px' : '20px') + ', -10px) scale(0.5)';
                 togglePopup(popupId, false);
             }
 
@@ -297,4 +290,3 @@
     </script>
 </body>
 </html>
-
