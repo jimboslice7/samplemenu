@@ -116,7 +116,7 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: width 0.3s ease, opacity 1s ease, transform 0.5s ease;
+            transition: opacity 1s ease, transform 0.5s ease, width 0.5s ease;
         }
         .button.shrunk {
             width: 50px;
@@ -125,10 +125,12 @@
         #exploreNearbyButton {
             bottom: 20px;
             left: 20px;
+            transition: left 0.5s ease, bottom 0.5s ease;
         }
         #localDealsButton {
             bottom: 20px;
             right: 20px;
+            transition: right 0.5s ease, bottom 0.5s ease;
         }
         .icon {
             width: 20px;
@@ -193,15 +195,18 @@
             setTimeout(function() {
                 exploreNearbyButton.style.opacity = 1;
                 localDealsButton.style.opacity = 1;
-                
-                // Slide/shrink left for exploreNearbyButton
-                exploreNearbyButton.classList.add('shrunk');
-                exploreNearbyButton.style.transform = 'translateX(-50px)';
-                
-                // Slide/shrink right for localDealsButton
-                localDealsButton.classList.add('shrunk');
-                localDealsButton.style.transform = 'translateX(50px)';
             }, 6000);
+
+            // After 3 more seconds, shrink and slide buttons to corners
+            setTimeout(function() {
+                exploreNearbyButton.classList.add('shrunk');
+                exploreNearbyButton.style.left = '10px';
+                exploreNearbyButton.style.bottom = '10px';
+                
+                localDealsButton.classList.add('shrunk');
+                localDealsButton.style.right = '10px';
+                localDealsButton.style.bottom = '10px';
+            }, 9000); // 9-second total delay
         }
 
         function toggleButton(buttonId, label, iconUrl) {
@@ -212,11 +217,6 @@
                 button.innerHTML = `<img src="${iconUrl}" alt="Icon" class="icon"> <span>${label}</span>`;
             } else {
                 button.classList.add('shrunk');
-                if (buttonId === 'exploreNearbyButton') {
-                    button.style.transform = 'translateX(-50px)';
-                } else {
-                    button.style.transform = 'translateX(50px)';
-                }
                 button.innerHTML = `<img src="${iconUrl}" alt="Icon" class="icon">`;
             }
 
@@ -226,6 +226,15 @@
                 'event_label': label
             });
         }
+
+        function trackAndOpen(url, label) {
+            gtag('event', 'link_click', {
+                'event_category': 'Link Interaction',
+                'event_label': label
+            });
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
+
