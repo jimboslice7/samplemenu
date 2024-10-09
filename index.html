@@ -199,7 +199,7 @@
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'dealsPopup')">
+    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span class="text">Local Deals</span>
     </button>
 
@@ -284,14 +284,17 @@
 
         function trackAndOpen(url, label) {
             // Track the click event with a custom label
-            gtag('event', 'popup_click', {
-                'event_category': 'Popup Interaction',
+            gtag('event', 'redirect_click', {
+                'event_category': 'Redirect Interaction',
                 'event_label': label
             });
             
-            // Open the URL in a new tab
-            window.open(url, '_blank');
+            // Delay the opening slightly to ensure the event registers
+            setTimeout(function() {
+                window.open(url, '_blank');
+            }, 300);
         }
     </script>
 </body>
 </html>
+
