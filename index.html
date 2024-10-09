@@ -118,6 +118,9 @@
             z-index: 20;
             transition: opacity 1s ease, transform 1s ease, width 1s ease, left 1s ease, right 1s ease, bottom 1s ease;
         }
+        .button.disabled {
+            pointer-events: none; /* Disable interaction */
+        }
         .button.shrunk {
             width: 50px;
             padding: 15px;
@@ -178,12 +181,12 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button" onclick="toggleButton('exploreNearbyButton', 'explorePopup')">
+    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup', 'localDealsButton', 'dealsPopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button" onclick="toggleButton('localDealsButton', 'dealsPopup')">
+    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span class="text">Local Deals</span>
     </button>
 
@@ -207,22 +210,35 @@
                 localDealsButton.style.opacity = 1;
             }, 6000);
 
-            // After 3 more seconds, shrink and slide buttons to corners
+            // After 3 more seconds, shrink and slide buttons to corners, and enable them
             setTimeout(function() {
                 exploreNearbyButton.classList.add('shrunk');
                 exploreNearbyButton.style.left = '10px';
                 exploreNearbyButton.style.bottom = '10px';
+                exploreNearbyButton.classList.remove('disabled');
                 
                 localDealsButton.classList.add('shrunk');
                 localDealsButton.style.right = '10px';
                 localDealsButton.style.bottom = '10px';
+                localDealsButton.classList.remove('disabled');
             }, 9000);
         }
 
-        function toggleButton(buttonId, popupId) {
+        function handleButtonClick(buttonId, popupId, otherButtonId, otherPopupId) {
             var button = document.getElementById(buttonId);
-            var isShrunk = button.classList.contains('shrunk');
+            var otherButton = document.getElementById(otherButtonId);
 
+            // If the other button is expanded, shrink it and hide its popup
+            if (!otherButton.classList.contains('shrunk')) {
+                otherButton.classList.add('shrunk');
+                otherButton.style.left = otherButtonId === 'exploreNearbyButton' ? '10px' : '';
+                otherButton.style.right = otherButtonId === 'localDealsButton' ? '10px' : '';
+                otherButton.style.bottom = '10px';
+                togglePopup(otherPopupId, false);
+            }
+
+            // Toggle the clicked button and popup
+            var isShrunk = button.classList.contains('shrunk');
             if (isShrunk) {
                 button.classList.remove('shrunk');
                 button.style.left = buttonId === 'exploreNearbyButton' ? '20px' : '';
@@ -234,17 +250,15 @@
                 button.style.right = buttonId === 'localDealsButton' ? '10px' : '';
                 button.style.bottom = '10px';
             }
-
-            togglePopup(popupId);
+            togglePopup(popupId, !isShrunk);
         }
 
-        function togglePopup(popupId) {
+        function togglePopup(popupId, show) {
             var popup = document.getElementById(popupId);
-            if (popup.classList.contains('visible')) {
-                popup.classList.remove('visible');
-            } else {
-                document.querySelectorAll('.popup').forEach(el => el.classList.remove('visible'));
+            if (show) {
                 popup.classList.add('visible');
+            } else {
+                popup.classList.remove('visible');
             }
         }
 
