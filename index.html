@@ -116,21 +116,22 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease, transform 0.5s ease, width 0.5s ease;
+            transition: opacity 1s ease, transform 1s ease, width 1s ease, left 1s ease, right 1s ease;
         }
         .button.shrunk {
             width: 50px;
             padding: 15px;
         }
+        .button .text {
+            transition: opacity 0.5s ease;
+        }
         #exploreNearbyButton {
             bottom: 20px;
             left: 20px;
-            transition: left 0.5s ease, bottom 0.5s ease;
         }
         #localDealsButton {
             bottom: 20px;
             right: 20px;
-            transition: right 0.5s ease, bottom 0.5s ease;
         }
         .icon {
             width: 20px;
@@ -168,13 +169,13 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button" onclick="toggleButton('exploreNearbyButton', 'Explore Nearby', 'https://img.icons8.com/ios-filled/50/FFFFFF/marker.png')">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span>Explore Nearby</span>
+    <button id="exploreNearbyButton" class="button" onclick="togglePopup('explorePopup', this)">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button" onclick="toggleButton('localDealsButton', 'Local Deals', 'https://img.icons8.com/ios-filled/50/FFFFFF/gift.png')">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span>Local Deals</span>
+    <button id="localDealsButton" class="button" onclick="togglePopup('dealsPopup', this)">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span class="text">Local Deals</span>
     </button>
 
     <script>
@@ -199,6 +200,9 @@
 
             // After 3 more seconds, shrink and slide buttons to corners
             setTimeout(function() {
+                fadeOutText(exploreNearbyButton);
+                fadeOutText(localDealsButton);
+
                 exploreNearbyButton.classList.add('shrunk');
                 exploreNearbyButton.style.left = '10px';
                 exploreNearbyButton.style.bottom = '10px';
@@ -206,25 +210,24 @@
                 localDealsButton.classList.add('shrunk');
                 localDealsButton.style.right = '10px';
                 localDealsButton.style.bottom = '10px';
-            }, 9000); // 9-second total delay
+            }, 9000);
         }
 
-        function toggleButton(buttonId, label, iconUrl) {
-            var button = document.getElementById(buttonId);
-            if (button.classList.contains('shrunk')) {
-                button.classList.remove('shrunk');
-                button.style.transform = 'translateX(0)';
-                button.innerHTML = `<img src="${iconUrl}" alt="Icon" class="icon"> <span>${label}</span>`;
-            } else {
-                button.classList.add('shrunk');
-                button.innerHTML = `<img src="${iconUrl}" alt="Icon" class="icon">`;
+        function fadeOutText(button) {
+            var text = button.querySelector('.text');
+            if (text) {
+                text.style.opacity = 0;
             }
+        }
 
-            // Track button taps in Google Analytics
-            gtag('event', 'button_tap', {
-                'event_category': 'User Interaction',
-                'event_label': label
-            });
+        function togglePopup(popupId, button) {
+            var popup = document.getElementById(popupId);
+            if (popup.classList.contains('visible')) {
+                popup.classList.remove('visible');
+            } else {
+                document.querySelectorAll('.popup').forEach(el => el.classList.remove('visible'));
+                popup.classList.add('visible');
+            }
         }
 
         function trackAndOpen(url, label) {
@@ -237,4 +240,3 @@
     </script>
 </body>
 </html>
-
