@@ -124,7 +124,12 @@
             justify-content: center;
         }
         .button .text {
+            display: inline-block;
+            opacity: 1;
             transition: opacity 0.5s ease;
+        }
+        .button.shrunk .text {
+            display: none;
         }
         #exploreNearbyButton {
             bottom: 20px;
@@ -170,12 +175,12 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button" onclick="toggleButton('exploreNearbyButton', 'Explore Nearby', 'https://img.icons8.com/ios-filled/50/FFFFFF/marker.png', 'explorePopup')">
+    <button id="exploreNearbyButton" class="button" onclick="toggleButton('exploreNearbyButton', 'explorePopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button" onclick="toggleButton('localDealsButton', 'Local Deals', 'https://img.icons8.com/ios-filled/50/FFFFFF/gift.png', 'dealsPopup')">
+    <button id="localDealsButton" class="button" onclick="toggleButton('localDealsButton', 'dealsPopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span class="text">Local Deals</span>
     </button>
 
@@ -201,9 +206,6 @@
 
             // After 3 more seconds, shrink and slide buttons to corners
             setTimeout(function() {
-                fadeOutText(exploreNearbyButton);
-                fadeOutText(localDealsButton);
-
                 exploreNearbyButton.classList.add('shrunk');
                 exploreNearbyButton.style.left = '10px';
                 exploreNearbyButton.style.bottom = '10px';
@@ -214,16 +216,8 @@
             }, 9000);
         }
 
-        function fadeOutText(button) {
-            var text = button.querySelector('.text');
-            if (text) {
-                text.style.opacity = 0;
-            }
-        }
-
-        function toggleButton(buttonId, label, iconUrl, popupId) {
+        function toggleButton(buttonId, popupId) {
             var button = document.getElementById(buttonId);
-            var text = button.querySelector('.text');
             var isShrunk = button.classList.contains('shrunk');
 
             if (isShrunk) {
@@ -231,19 +225,17 @@
                 button.style.left = buttonId === 'exploreNearbyButton' ? '20px' : '';
                 button.style.right = buttonId === 'localDealsButton' ? '20px' : '';
                 button.style.bottom = '20px';
-                text.style.opacity = 1;
             } else {
                 button.classList.add('shrunk');
                 button.style.left = buttonId === 'exploreNearbyButton' ? '10px' : '';
                 button.style.right = buttonId === 'localDealsButton' ? '10px' : '';
                 button.style.bottom = '10px';
-                text.style.opacity = 0;
             }
 
-            togglePopup(popupId, button);
+            togglePopup(popupId);
         }
 
-        function togglePopup(popupId, button) {
+        function togglePopup(popupId) {
             var popup = document.getElementById(popupId);
             if (popup.classList.contains('visible')) {
                 popup.classList.remove('visible');
@@ -263,4 +255,5 @@
     </script>
 </body>
 </html>
+
 
