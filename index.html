@@ -116,16 +116,11 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: width 0.3s ease, opacity 1s ease;
+            transition: width 0.3s ease, opacity 1s ease, transform 0.5s ease;
         }
         .button.shrunk {
             width: 50px;
             padding: 15px;
-            transition: width 0.3s ease;
-        }
-        .button.expanded {
-            width: auto;
-            padding: 15px 20px;
         }
         #exploreNearbyButton {
             bottom: 20px;
@@ -138,7 +133,7 @@
         .icon {
             width: 20px;
             height: 20px;
-            margin-right: 0;
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -171,13 +166,13 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button" onclick="toggleButton('exploreNearbyButton', 'Explore Nearby')">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon">
+    <button id="exploreNearbyButton" class="button" onclick="toggleButton('exploreNearbyButton', 'Explore Nearby', 'https://img.icons8.com/ios-filled/50/FFFFFF/marker.png')">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span>Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button" onclick="toggleButton('localDealsButton', 'Local Deals')">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
+    <button id="localDealsButton" class="button" onclick="toggleButton('localDealsButton', 'Local Deals', 'https://img.icons8.com/ios-filled/50/FFFFFF/gift.png')">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span>Local Deals</span>
     </button>
 
     <script>
@@ -198,21 +193,31 @@
             setTimeout(function() {
                 exploreNearbyButton.style.opacity = 1;
                 localDealsButton.style.opacity = 1;
+                
+                // Slide/shrink left for exploreNearbyButton
                 exploreNearbyButton.classList.add('shrunk');
+                exploreNearbyButton.style.transform = 'translateX(-50px)';
+                
+                // Slide/shrink right for localDealsButton
                 localDealsButton.classList.add('shrunk');
-            }, 6000); // 6-second total delay to show buttons after the ad fades out
+                localDealsButton.style.transform = 'translateX(50px)';
+            }, 6000);
         }
 
-        function toggleButton(buttonId, label) {
+        function toggleButton(buttonId, label, iconUrl) {
             var button = document.getElementById(buttonId);
             if (button.classList.contains('shrunk')) {
                 button.classList.remove('shrunk');
-                button.classList.add('expanded');
-                button.innerHTML = `<img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Icon" class="icon"> ${label}`;
+                button.style.transform = 'translateX(0)';
+                button.innerHTML = `<img src="${iconUrl}" alt="Icon" class="icon"> <span>${label}</span>`;
             } else {
-                button.classList.remove('expanded');
                 button.classList.add('shrunk');
-                button.innerHTML = `<img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Icon" class="icon">`;
+                if (buttonId === 'exploreNearbyButton') {
+                    button.style.transform = 'translateX(-50px)';
+                } else {
+                    button.style.transform = 'translateX(50px)';
+                }
+                button.innerHTML = `<img src="${iconUrl}" alt="Icon" class="icon">`;
             }
 
             // Track button taps in Google Analytics
