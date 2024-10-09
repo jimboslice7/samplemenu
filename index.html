@@ -127,7 +127,7 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease, transform 0.5s ease, width 0.5s ease;
+            transition: opacity 1s ease, transform 0.5s ease;
         }
         .button.disabled {
             pointer-events: none; /* Disable interaction */
@@ -135,7 +135,7 @@
         .button.shrunk {
             width: 50px;
             padding: 15px;
-            transform: translate(0, 0) scale(0.5); /* Scale down smoothly */
+            transform: translate(0, 0); /* Ensure buttons don't scale down */
             justify-content: center;
         }
         .button .text {
@@ -224,14 +224,14 @@
                 localDealsButton.style.opacity = 1;
             }, 6000);
 
-            // After 3 more seconds, shrink and slide buttons to corners, and enable them
+            // After 3 more seconds, translate buttons to corners, and enable them
             setTimeout(function() {
                 exploreNearbyButton.classList.add('shrunk');
-                exploreNearbyButton.style.transform = 'translate(-20px, -10px) scale(0.5)';
+                exploreNearbyButton.style.transform = 'translate(-10px, -10px)';
                 exploreNearbyButton.classList.remove('disabled');
                 
                 localDealsButton.classList.add('shrunk');
-                localDealsButton.style.transform = 'translate(20px, -10px) scale(0.5)';
+                localDealsButton.style.transform = 'translate(10px, -10px)';
                 localDealsButton.classList.remove('disabled');
             }, 9000);
         }
@@ -243,7 +243,7 @@
             // If the other button is expanded, shrink it and hide its popup
             if (!otherButton.classList.contains('shrunk')) {
                 otherButton.classList.add('shrunk');
-                otherButton.style.transform = 'translate(' + (otherButtonId === 'exploreNearbyButton' ? '-20px' : '20px') + ', -10px) scale(0.5)';
+                otherButton.style.transform = 'translate(' + (otherButtonId === 'exploreNearbyButton' ? '-10px' : '10px') + ', -10px)';
                 togglePopup(otherPopupId, false);
             }
 
@@ -251,11 +251,11 @@
             var isShrunk = button.classList.contains('shrunk');
             if (isShrunk) {
                 button.classList.remove('shrunk');
-                button.style.transform = 'translate(0, 0) scale(1)';
+                button.style.transform = 'translate(0, 0)';
                 togglePopup(popupId, true);
             } else {
                 button.classList.add('shrunk');
-                button.style.transform = 'translate(' + (buttonId === 'exploreNearbyButton' ? '-20px' : '20px') + ', -10px) scale(0.5)';
+                button.style.transform = 'translate(' + (buttonId === 'exploreNearbyButton' ? '-10px' : '10px') + ', -10px)';
                 togglePopup(popupId, false);
             }
 
@@ -290,3 +290,4 @@
     </script>
 </body>
 </html>
+
