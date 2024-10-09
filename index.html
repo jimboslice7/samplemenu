@@ -41,7 +41,7 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #800423; /* Changed to burgundy/maroon */
+            background-color: #800423;
             color: white;
             text-align: center;
             padding: 20px;
@@ -101,7 +101,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .button {
-            opacity: 0; /* Initially hide buttons */
+            opacity: 0;
             position: fixed;
             display: flex;
             align-items: center;
@@ -116,10 +116,16 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: background-color 0.3s ease, opacity 1s ease;
+            transition: width 0.3s ease, opacity 1s ease;
         }
-        .button.active {
-            background-color: #b08b60;
+        .button.shrunk {
+            width: 50px;
+            padding: 15px;
+            transition: width 0.3s ease;
+        }
+        .button.expanded {
+            width: auto;
+            padding: 15px 20px;
         }
         #exploreNearbyButton {
             bottom: 20px;
@@ -132,7 +138,7 @@
         .icon {
             width: 20px;
             height: 20px;
-            margin-right: 8px;
+            margin-right: 0;
         }
     </style>
 </head>
@@ -165,13 +171,13 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button" onclick="togglePopup('explorePopup', this)">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span>Explore Nearby</span>
+    <button id="exploreNearbyButton" class="button" onclick="toggleButton('exploreNearbyButton', 'Explore Nearby')">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon">
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button" onclick="togglePopup('dealsPopup', this)">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span>Local Deals</span>
+    <button id="localDealsButton" class="button" onclick="toggleButton('localDealsButton', 'Local Deals')">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
     </button>
 
     <script>
@@ -191,48 +197,30 @@
             // Show the buttons 3 seconds after the ad fades out
             setTimeout(function() {
                 exploreNearbyButton.style.opacity = 1;
-                exploreNearbyButton.style.display = 'flex';
                 localDealsButton.style.opacity = 1;
-                localDealsButton.style.display = 'flex';
+                exploreNearbyButton.classList.add('shrunk');
+                localDealsButton.classList.add('shrunk');
             }, 6000); // 6-second total delay to show buttons after the ad fades out
         }
 
-        function togglePopup(popupId, button) {
-            var popup = document.getElementById(popupId);
-            if (popup.classList.contains('visible')) {
-                popup.classList.remove('visible');
-                popup.style.transform = "translate(-50%, 100%)";
-                button.classList.remove('active');
+        function toggleButton(buttonId, label) {
+            var button = document.getElementById(buttonId);
+            if (button.classList.contains('shrunk')) {
+                button.classList.remove('shrunk');
+                button.classList.add('expanded');
+                button.innerHTML = `<img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Icon" class="icon"> ${label}`;
             } else {
-                document.querySelectorAll('.popup').forEach(el => {
-                    el.classList.remove('visible');
-                    el.style.transform = "translate(-50%, 100%)";
-                });
-                document.querySelectorAll('.button').forEach(btn => btn.classList.remove('active'));
-                
-                popup.classList.add('visible');
-                popup.style.transform = "translate(-50%, 0)";
-                button.classList.add('active');
+                button.classList.remove('expanded');
+                button.classList.add('shrunk');
+                button.innerHTML = `<img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Icon" class="icon">`;
             }
 
             // Track button taps in Google Analytics
             gtag('event', 'button_tap', {
                 'event_category': 'User Interaction',
-                'event_label': popupId === 'explorePopup' ? 'Explore Nearby Button' : 'Local Deals Button'
-            });
-        }
-
-        function trackAndOpen(url, label) {
-            // Track the click event
-            gtag('event', 'link_click', {
-                'event_category': 'Link Interaction',
                 'event_label': label
             });
-
-            // Open the URL in a new tab
-            window.open(url, '_blank');
         }
     </script>
 </body>
 </html>
-
