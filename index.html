@@ -244,13 +244,14 @@
                 button.style.left = buttonId === 'exploreNearbyButton' ? '20px' : '';
                 button.style.right = buttonId === 'localDealsButton' ? '20px' : '';
                 button.style.bottom = '20px';
+                togglePopup(popupId, true);
             } else {
                 button.classList.add('shrunk');
                 button.style.left = buttonId === 'exploreNearbyButton' ? '10px' : '';
                 button.style.right = buttonId === 'localDealsButton' ? '10px' : '';
                 button.style.bottom = '10px';
+                togglePopup(popupId, false);
             }
-            togglePopup(popupId, !isShrunk);
         }
 
         function togglePopup(popupId, show) {
