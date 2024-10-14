@@ -54,12 +54,11 @@
 
         /* Button Styling */
         .button {
-            opacity: 0;
+            opacity: 1;
             position: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
             background-color: #D2B48C;
             color: white;
             border: none;
@@ -69,14 +68,13 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease, bottom 0.5s ease, left 0.5s ease, right 0.5s ease, width 0.5s ease, padding 0.5s ease;
-            width: 50px; /* Circle size */
+            transition: all 0.4s ease; /* Smooth transition */
+            width: 50px; /* Circle */
             height: 50px;
         }
 
         .button.expanded {
-            width: 200px; /* Expand width */
-            padding: 15px 20px; /* Adjust padding when expanded */
+            width: 200px; /* Expands width */
             border-radius: 50px; /* Pill shape when expanded */
         }
 
@@ -84,6 +82,7 @@
             display: none; /* Hidden when button is collapsed */
             margin-left: 10px; /* Space between icon and text */
             white-space: nowrap;
+            transition: opacity 0.3s ease;
         }
 
         .button.expanded .text {
@@ -177,13 +176,13 @@
             var button = document.getElementById(buttonId);
             var otherButton = document.getElementById(otherButtonId);
 
-            // Toggle the current button
+            // Toggle expand/collapse the clicked button
             button.classList.toggle('expanded');
 
-            // Slide out the text if expanded, and collapse if not
+            // Toggle popup visibility
             togglePopup(popupId);
 
-            // Ensure the other button collapses if open
+            // Collapse the other button if it is expanded
             if (otherButton.classList.contains('expanded')) {
                 otherButton.classList.remove('expanded');
             }
