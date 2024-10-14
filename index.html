@@ -36,7 +36,7 @@
 
         /* Ensure image scales properly */
         #menu-image {
-            max-width: 90%;
+            max-width: 70%; /* Zoomed out more */
             height: auto;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -70,13 +70,13 @@
             border-radius: 50px; /* Pill shape when expanded */
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-size: 18px;
+            font-size: 20px; /* Increased font size */
             font-weight: bold;
             z-index: 20;
             transition: all 0.5s ease;
-            width: 180px;
-            height: 50px;
-            padding: 15px 20px;
+            width: 200px; /* Increased button size */
+            height: 60px;
+            padding: 20px 25px;
             white-space: nowrap; /* Prevent text from wrapping to multiple lines */
         }
 
@@ -86,8 +86,8 @@
 
         /* Circle shape when shrunk */
         .button.shrunk {
-            width: 50px;
-            padding: 15px;
+            width: 60px; /* Increased size when shrunk */
+            padding: 20px;
             justify-content: center;
             border-radius: 50%; /* Circle when collapsed */
         }
@@ -114,9 +114,9 @@
         }
 
         .icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px; /* Added margin-right for spacing */
+            width: 30px; /* Increased icon size */
+            height: 30px;
+            margin-right: 10px; /* Adjusted spacing */
         }
 
         .button.shrunk .icon {
@@ -150,8 +150,8 @@
         }
 
         .popup .icon-top {
-            width: 40px;
-            height: 40px;
+            width: 45px; /* Slightly increased icon size in popup */
+            height: 45px;
             margin-bottom: 5px;
         }
 
@@ -194,9 +194,9 @@
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .button {
-                width: 150px; /* Adjust width on smaller screens */
-                height: 45px;
-                font-size: 16px;
+                width: 170px;
+                height: 55px;
+                font-size: 18px;
             }
 
             #exploreNearbyButton, #localDealsButton {
@@ -209,7 +209,7 @@
             }
 
             #menu-image {
-                max-width: 95%; /* Ensure image fits screen on smaller devices */
+                max-width: 80%; /* Further zoom out for smaller devices */
                 height: auto;
             }
         }
