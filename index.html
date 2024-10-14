@@ -59,45 +59,35 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px 20px;
+            padding: 15px;
             background-color: #D2B48C;
             color: white;
             border: none;
-            border-radius: 50px; /* Pill shape */
+            border-radius: 50%; /* Circle by default */
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease, left 0.5s ease, right 0.5s ease, bottom 0.5s ease, width 0.5s ease, padding 0.5s ease;
+            transition: opacity 1s ease, bottom 0.5s ease, left 0.5s ease, right 0.5s ease, width 0.5s ease, padding 0.5s ease;
+            width: 50px; /* Circle size */
+            height: 50px;
         }
-        .button.disabled {
-            pointer-events: none; /* Disable interaction */
+
+        .button.expanded {
+            width: 200px; /* Expand width */
+            padding: 15px 20px; /* Adjust padding when expanded */
+            border-radius: 50px; /* Pill shape when expanded */
         }
 
         .button .text {
-            display: inline-block;
-            opacity: 1;
-            transition: transform 0.5s ease, opacity 0.5s ease;
+            display: none; /* Hidden when button is collapsed */
+            margin-left: 10px; /* Space between icon and text */
+            white-space: nowrap;
         }
 
-        /* Sliding out to the right for Explore Nearby */
-        .button.slide-out-right .text {
-            transform: translateX(150%);
-            opacity: 0;
-        }
-
-        /* Sliding out to the left for Local Deals */
-        .button.slide-out-left .text {
-            transform: translateX(-150%);
-            opacity: 0;
-        }
-
-        /* Circle shape after collapse */
-        .button.collapsed {
-            width: 50px;
-            padding: 15px;
-            justify-content: center;
+        .button.expanded .text {
+            display: inline-block; /* Show text when button is expanded */
         }
 
         #exploreNearbyButton {
@@ -112,7 +102,6 @@
         .icon {
             width: 20px;
             height: 20px;
-            margin-right: 8px; /* Added margin-right for spacing */
         }
 
         /* Popup Styles */
@@ -172,53 +161,31 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup', 'localDealsButton', 'dealsPopup', 'right')">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span class="text">Explore Nearby</span>
+    <button id="exploreNearbyButton" class="button" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup', 'localDealsButton')">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> 
+        <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup', 'left')">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span class="text">Local Deals</span>
+    <button id="localDealsButton" class="button" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton')">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
+        <span class="text">Local Deals</span>
     </button>
 
     <script>
-        window.onload = function() {
-            var ad = document.getElementById('ad');
-            var exploreNearbyButton = document.getElementById('exploreNearbyButton');
-            var localDealsButton = document.getElementById('localDealsButton');
-            
-            // Fade in the ad on load
-            ad.style.opacity = 1;
-            
-            // After 3 seconds, fade out the ad
-            setTimeout(function() {
-                ad.style.opacity = 0;
-            }, 3000);
-
-            // Show the buttons 3 seconds after the ad fades out
-            setTimeout(function() {
-                exploreNearbyButton.style.opacity = 1;
-                localDealsButton.style.opacity = 1;
-            }, 6000);
-        }
-
-        function handleButtonClick(buttonId, popupId, otherButtonId, otherPopupId, direction) {
+        function handleButtonClick(buttonId, popupId, otherButtonId) {
             var button = document.getElementById(buttonId);
             var otherButton = document.getElementById(otherButtonId);
-            
-            // Slide out the text based on direction
-            if (direction === 'right') {
-                button.classList.add('slide-out-right', 'collapsed');
-            } else {
-                button.classList.add('slide-out-left', 'collapsed');
-            }
 
-            // Collapse the button and show popup
+            // Toggle the current button
+            button.classList.toggle('expanded');
+
+            // Slide out the text if expanded, and collapse if not
             togglePopup(popupId);
 
-            // Reset the other button if expanded
-            if (otherButton.classList.contains('slide-out-right') || otherButton.classList.contains('slide-out-left')) {
-                otherButton.classList.remove('slide-out-right', 'slide-out-left', 'collapsed');
+            // Ensure the other button collapses if open
+            if (otherButton.classList.contains('expanded')) {
+                otherButton.classList.remove('expanded');
             }
         }
 
