@@ -70,11 +70,11 @@
             border-radius: 50px; /* Pill shape when expanded */
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-size: 20px; /* Increased font size */
+            font-size: 20px;
             font-weight: bold;
             z-index: 20;
             transition: all 0.5s ease;
-            width: 200px; /* Increased button size */
+            width: 220px; /* Increased button width */
             height: 60px;
             padding: 20px 25px;
             white-space: nowrap; /* Prevent text from wrapping to multiple lines */
@@ -129,8 +129,8 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 90%;
-            max-width: 360px;
+            width: 90%; /* Ensure it fits smaller screens */
+            max-width: 350px; /* Adjusted max-width for popups */
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -194,7 +194,7 @@
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .button {
-                width: 170px;
+                width: 180px; /* Slightly smaller on smaller screens */
                 height: 55px;
                 font-size: 18px;
             }
@@ -204,7 +204,7 @@
             }
 
             .popup {
-                width: 100%;
+                width: 95%; /* Adjusted to fit smaller screens */
                 max-width: none;
             }
 
