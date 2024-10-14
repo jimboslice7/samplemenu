@@ -51,68 +51,8 @@
             transition: opacity 2s ease-in-out;
             z-index: 10;
         }
-        .popup {
-            position: fixed;
-            bottom: -100%;
-            left: 50%;
-            transform: translate(-50%, 100%);
-            width: 90%;
-            max-width: 360px; /* Limit max width for small screens */
-            background-color: #fffaf0;
-            color: #800020;
-            border: 3px solid #800020;
-            border-radius: 15px;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            z-index: 15;
-            pointer-events: none;
-            transition: transform 0.5s ease, bottom 0.5s ease;
-            text-align: center; /* Center align content */
-        }
-        .popup.visible {
-            bottom: 30%;
-            transform: translate(-50%, 0);
-            pointer-events: auto;
-        }
-        .popup .icon-top {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 5px; /* Reduce space between icon and title */
-        }
-        .popup h2 {
-            color: #800020;
-            border-bottom: 2px solid #D2B48C;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-            margin-top: 0; /* Remove additional top margin */
-            text-align: center;
-        }
-        .popup ul {
-            padding: 0;
-            list-style-type: none;
-        }
-        .popup li {
-            margin: 8px 0;
-            display: flex;
-            justify-content: center;
-        }
-        .link-button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #D2B48C;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            font-size: 16px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: left; /* Left-align text */
-        }
 
-        /* Pill-shaped button styling */
+        /* Button Styling */
         .button {
             opacity: 0;
             position: fixed;
@@ -123,32 +63,36 @@
             background-color: #D2B48C;
             color: white;
             border: none;
-            border-radius: 50px; /* Pill shape when expanded */
+            border-radius: 50px; /* Pill shape */
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease, bottom 0.5s ease, left 0.5s ease, right 0.5s ease, border-radius 0.3s ease;
+            transition: opacity 1s ease, left 0.5s ease, right 0.5s ease, bottom 0.5s ease;
         }
         .button.disabled {
             pointer-events: none; /* Disable interaction */
         }
-        /* Circle shape when shrunk */
-        .button.shrunk {
-            width: 50px;
-            padding: 15px;
-            justify-content: center;
-            border-radius: 50%; /* Circle when collapsed */
-        }
+
         .button .text {
             display: inline-block;
             opacity: 1;
-            transition: opacity 0.5s ease;
+            transition: transform 0.5s ease;
         }
-        .button.shrunk .text {
-            display: none;
+
+        /* Sliding out to the right for Explore Nearby */
+        .button.slide-out-right .text {
+            transform: translateX(150%);
+            opacity: 0;
         }
+
+        /* Sliding out to the left for Local Deals */
+        .button.slide-out-left .text {
+            transform: translateX(-150%);
+            opacity: 0;
+        }
+
         #exploreNearbyButton {
             bottom: 20px;
             left: 20px;
@@ -157,13 +101,11 @@
             bottom: 20px;
             right: 20px;
         }
+
         .icon {
             width: 20px;
             height: 20px;
             margin-right: 8px; /* Added margin-right for spacing */
-        }
-        .button.shrunk .icon {
-            margin-right: 0; /* Remove margin when shrunk */
         }
     </style>
 </head>
@@ -198,12 +140,12 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup', 'localDealsButton', 'dealsPopup')">
+    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup', 'localDealsButton', 'dealsPopup', 'right')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup')">
+    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup', 'left')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon"> <span class="text">Local Deals</span>
     </button>
 
@@ -226,64 +168,31 @@
                 exploreNearbyButton.style.opacity = 1;
                 localDealsButton.style.opacity = 1;
             }, 6000);
-
-            // After 3 more seconds, shrink buttons to corners, and enable them
-            setTimeout(function() {
-                exploreNearbyButton.classList.add('shrunk');
-                exploreNearbyButton.style.left = '10px';
-                exploreNearbyButton.style.bottom = '10px';
-                exploreNearbyButton.classList.remove('disabled');
-                
-                localDealsButton.classList.add('shrunk');
-                localDealsButton.style.right = '10px';
-                localDealsButton.style.bottom = '10px';
-                localDealsButton.classList.remove('disabled');
-            }, 9000);
         }
 
-        function handleButtonClick(buttonId, popupId, otherButtonId, otherPopupId) {
+        function handleButtonClick(buttonId, popupId, otherButtonId, otherPopupId, direction) {
             var button = document.getElementById(buttonId);
             var otherButton = document.getElementById(otherButtonId);
-
-            // If the other button is expanded, shrink it and hide its popup
-            if (!otherButton.classList.contains('shrunk')) {
-                otherButton.classList.add('shrunk');
-                otherButton.style.left = otherButtonId === 'exploreNearbyButton' ? '10px' : '';
-                otherButton.style.right = otherButtonId === 'localDealsButton' ? '10px' : '';
-                otherButton.style.bottom = '10px';
-                togglePopup(otherPopupId, false);
-            }
-
-            // Toggle the clicked button and popup
-            var isShrunk = button.classList.contains('shrunk');
-            if (isShrunk) {
-                button.classList.remove('shrunk');
-                button.style.left = buttonId === 'exploreNearbyButton' ? '20px' : '';
-                button.style.right = buttonId === 'localDealsButton' ? '20px' : '';
-                button.style.bottom = '20px';
-                togglePopup(popupId, true);
+            
+            // Slide out the text based on direction
+            if (direction === 'right') {
+                button.classList.toggle('slide-out-right');
             } else {
-                button.classList.add('shrunk');
-                button.style.left = buttonId === 'exploreNearbyButton' ? '10px' : '';
-                button.style.right = buttonId === 'localDealsButton' ? '10px' : '';
-                button.style.bottom = '10px';
-                togglePopup(popupId, false);
+                button.classList.toggle('slide-out-left');
             }
 
-            // Track the button tap with a custom label
-            gtag('event', 'button_tap', {
-                'event_category': 'User Interaction',
-                'event_label': buttonId === 'exploreNearbyButton' ? 'Nearby Events Button' : 'Local Deals Button'
-            });
+            // Hide the text of the other button if it's expanded
+            if (otherButton.classList.contains('slide-out-right') || otherButton.classList.contains('slide-out-left')) {
+                otherButton.classList.remove('slide-out-right', 'slide-out-left');
+            }
+
+            // Toggle the popup
+            togglePopup(popupId);
         }
 
-        function togglePopup(popupId, show) {
+        function togglePopup(popupId) {
             var popup = document.getElementById(popupId);
-            if (show) {
-                popup.classList.add('visible');
-            } else {
-                popup.classList.remove('visible');
-            }
+            popup.classList.toggle('visible');
         }
 
         function trackAndOpen(url, label) {
