@@ -86,7 +86,8 @@
 
         /* Circle shape when shrunk */
         .button.shrunk {
-            width: 60px; /* Increased size when shrunk */
+            width: 60px;
+            height: 60px; /* Ensures perfect circle */
             padding: 20px;
             justify-content: center;
             border-radius: 50%; /* Circle when collapsed */
@@ -116,7 +117,7 @@
         .icon {
             width: 30px; /* Increased icon size */
             height: 30px;
-            margin-right: 0px; /* Removed the extra space */
+            margin-right: 8px; /* Re-added margin for space between gift icon and text */
         }
 
         .button.shrunk .icon {
@@ -129,8 +130,8 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 85%; /* Reduced width for better mobile fit */
-            max-width: 320px; /* Further shrunk the max-width */
+            width: 80%; /* Reduced width further for better mobile fit */
+            max-width: 300px; /* Further shrunk the max-width */
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -204,7 +205,7 @@
             }
 
             .popup {
-                width: 95%; /* Adjusted to fit smaller screens */
+                width: 90%; /* Adjusted to fit smaller screens */
                 max-width: none;
             }
 
