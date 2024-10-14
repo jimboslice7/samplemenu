@@ -69,7 +69,7 @@
             font-size: 18px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease, left 0.5s ease, right 0.5s ease, bottom 0.5s ease, transform 0.5s ease;
+            transition: opacity 1s ease, left 0.5s ease, right 0.5s ease, bottom 0.5s ease, width 0.5s ease, padding 0.5s ease;
         }
         .button.disabled {
             pointer-events: none; /* Disable interaction */
@@ -91,6 +91,13 @@
         .button.slide-out-left .text {
             transform: translateX(-150%);
             opacity: 0;
+        }
+
+        /* Circle shape after collapse */
+        .button.collapsed {
+            width: 50px;
+            padding: 15px;
+            justify-content: center;
         }
 
         #exploreNearbyButton {
@@ -201,18 +208,18 @@
             
             // Slide out the text based on direction
             if (direction === 'right') {
-                button.classList.toggle('slide-out-right');
+                button.classList.add('slide-out-right', 'collapsed');
             } else {
-                button.classList.toggle('slide-out-left');
+                button.classList.add('slide-out-left', 'collapsed');
             }
 
-            // Hide the text of the other button if it's expanded
-            if (otherButton.classList.contains('slide-out-right') || otherButton.classList.contains('slide-out-left')) {
-                otherButton.classList.remove('slide-out-right', 'slide-out-left');
-            }
-
-            // Toggle the popup
+            // Collapse the button and show popup
             togglePopup(popupId);
+
+            // Reset the other button if expanded
+            if (otherButton.classList.contains('slide-out-right') || otherButton.classList.contains('slide-out-left')) {
+                otherButton.classList.remove('slide-out-right', 'slide-out-left', 'collapsed');
+            }
         }
 
         function togglePopup(popupId) {
