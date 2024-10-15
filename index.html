@@ -36,7 +36,7 @@
 
         /* Ensure image scales properly */
         #menu-image {
-            max-width: 70%; /* Zoomed out more */
+            max-width: 70%;
             height: auto;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -67,41 +67,40 @@
             background-color: #D2B48C;
             color: white;
             border: none;
-            border-radius: 50px; /* Pill shape when expanded */
+            border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             font-size: 20px;
             font-weight: bold;
             z-index: 20;
-            transition: opacity 1s ease-in-out, width 0.5s ease, height 0.5s ease; /* Added opacity transition */
-            width: 220px; /* Increased button width */
+            transition: opacity 1s ease-in-out, width 0.5s ease, height 0.5s ease;
+            width: 220px;
             height: 60px;
             padding: 20px 25px;
-            white-space: nowrap; /* Prevent text from wrapping to multiple lines */
+            white-space: nowrap;
         }
 
         .button.disabled {
             pointer-events: none;
         }
 
-        /* Circle shape when shrunk */
         .button.shrunk {
             width: 60px;
-            height: 60px; /* Ensures perfect circle */
+            height: 60px;
             padding: 20px;
             justify-content: center;
-            border-radius: 50%; /* Circle when collapsed */
+            border-radius: 50%;
         }
 
         .button .text {
             display: inline-block;
-            opacity: 0; /* Start with text hidden */
-            transition: opacity 0.3s ease 0.5s; /* Delay text appearance until after expansion */
-            white-space: nowrap; /* Prevent text wrapping */
+            opacity: 0;
+            transition: opacity 0.3s ease 0.5s;
+            white-space: nowrap;
         }
 
         .button:not(.shrunk) .text {
-            opacity: 1; /* Show text only after the button has expanded */
+            opacity: 1;
         }
 
         .button.shrunk .text {
@@ -119,9 +118,9 @@
         }
 
         .icon {
-            width: 30px; /* Increased icon size */
+            width: 30px;
             height: 30px;
-            margin-right: 8px; /* Re-added margin for space between gift icon and text */
+            margin-right: 8px;
         }
 
         .button.shrunk .icon {
@@ -134,8 +133,8 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 70%; /* Further reduced width */
-            max-width: 250px; /* Greatly shrunk the max-width */
+            width: 60%; /* Reduced width */
+            max-width: 230px; /* Shrunk max width for better fit */
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -155,7 +154,7 @@
         }
 
         .popup .icon-top {
-            width: 45px; /* Slightly increased icon size in popup */
+            width: 45px;
             height: 45px;
             margin-bottom: 5px;
         }
@@ -199,7 +198,7 @@
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .button {
-                width: 180px; /* Slightly smaller on smaller screens */
+                width: 180px;
                 height: 55px;
                 font-size: 18px;
             }
@@ -209,12 +208,12 @@
             }
 
             .popup {
-                width: 90%; /* Adjusted to fit smaller screens */
+                width: 85%;
                 max-width: none;
             }
 
             #menu-image {
-                max-width: 80%; /* Further zoom out for smaller devices */
+                max-width: 80%;
                 height: auto;
             }
         }
@@ -301,7 +300,7 @@
             var otherButton = document.getElementById(otherButtonId);
 
             // Zoom out to original view before showing the popup
-            document.documentElement.style.zoom = "100%"; // Reset zoom
+            document.body.style.zoom = "100%";
 
             // Collapse the other button and popup if open
             if (!otherButton.classList.contains('shrunk')) {
