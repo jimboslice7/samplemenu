@@ -73,7 +73,7 @@
             font-size: 20px;
             font-weight: bold;
             z-index: 20;
-            transition: width 0.5s ease, height 0.5s ease; /* Transition only width and height */
+            transition: opacity 1s ease-in-out, width 0.5s ease, height 0.5s ease; /* Added opacity transition */
             width: 220px; /* Increased button width */
             height: 60px;
             padding: 20px 25px;
@@ -134,8 +134,8 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 75%; /* Reduced width for better mobile fit */
-            max-width: 270px; /* Further shrunk the max-width */
+            width: 70%; /* Further reduced width */
+            max-width: 250px; /* Greatly shrunk the max-width */
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -301,8 +301,7 @@
             var otherButton = document.getElementById(otherButtonId);
 
             // Zoom out to original view before showing the popup
-            document.body.style.transform = 'scale(1)';
-            document.body.style.transformOrigin = '0 0';
+            document.documentElement.style.zoom = "100%"; // Reset zoom
 
             // Collapse the other button and popup if open
             if (!otherButton.classList.contains('shrunk')) {
