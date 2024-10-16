@@ -133,8 +133,8 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 60%;
-            max-width: 230px;
+            width: 80%;
+            max-width: 300px;
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -148,7 +148,7 @@
         }
 
         .popup.visible {
-            bottom: 30%;
+            bottom: 20%;
             transform: translate(-50%, 0);
             pointer-events: auto;
         }
@@ -231,29 +231,6 @@
             width: 50px;
             height: 50px;
         }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .button {
-                width: 180px;
-                height: 55px;
-                font-size: 18px;
-            }
-
-            #exploreNearbyButton, #localDealsButton {
-                bottom: 10px;
-            }
-
-            .popup {
-                width: 85%;
-                max-width: none;
-            }
-
-            #menu-image {
-                max-width: 80%;
-                height: auto;
-            }
-        }
     </style>
 </head>
 <body>
@@ -310,13 +287,13 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup', 'localDealsButton', 'dealsPopup')">
+    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('explorePopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> 
         <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup')">
+    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('dealsPopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
         <span class="text">Local Deals</span>
     </button>
@@ -355,39 +332,20 @@
             }, 9000);
         }
 
-        function handleButtonClick(buttonId, popupId, otherButtonId, otherPopupId) {
-            var button = document.getElementById(buttonId);
-            var otherButton = document.getElementById(otherButtonId);
+        function handleButtonClick(popupId) {
+            // Collapse any open popups
+            closeAllPopups();
 
-            // Collapse the other button and popup if open
-            if (!otherButton.classList.contains('shrunk')) {
-                otherButton.classList.add('shrunk');
-                togglePopup(otherPopupId, false);
-            }
-
-            // Toggle expand/collapse the clicked button and corresponding popup
-            var isShrunk = button.classList.contains('shrunk');
-            if (isShrunk) {
-                button.classList.remove('shrunk');
-                togglePopup(popupId, true);
-            } else {
-                button.classList.add('shrunk');
-                togglePopup(popupId, false);
-            }
+            // Show the corresponding popup
+            var popup = document.getElementById(popupId);
+            popup.classList.add('visible');
         }
 
-        function togglePopup(popupId, show) {
-            var popup = document.getElementById(popupId);
-            if (show) {
-                popup.classList.add('visible');
-                document.addEventListener('click', function(event) {
-                    if (!popup.contains(event.target)) {
-                        closePopup(popupId);
-                    }
-                });
-            } else {
+        function closeAllPopups() {
+            var popups = document.querySelectorAll('.popup');
+            popups.forEach(function(popup) {
                 popup.classList.remove('visible');
-            }
+            });
         }
 
         function closePopup(popupId) {
