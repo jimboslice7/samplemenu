@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Brunch Menu Sample</title>
     
     <!-- Open Graph Metadata for NFC Popup -->
@@ -353,9 +353,6 @@
         function handleButtonClick(buttonId, popupId, otherButtonId, otherPopupId) {
             var button = document.getElementById(buttonId);
             var otherButton = document.getElementById(otherButtonId);
-
-            // Zoom out to original view before showing the popup
-            document.body.style.zoom = "100%";
 
             // Collapse the other button and popup if open
             if (!otherButton.classList.contains('shrunk')) {
