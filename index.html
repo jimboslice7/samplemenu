@@ -274,7 +274,7 @@
 
     <!-- Popup for Explore Nearby -->
     <div id="explorePopup" class="popup">
-        <button class="close-btn" onclick="closePopup('explorePopup')">&times;</button>
+        <button class="close-btn" onclick="closePopup('explorePopup')">-</button>
         <img src="https://img.icons8.com/ios-filled/50/800020/marker.png" alt="Location Icon" class="icon-top">
         <h2>Upcoming Events & Activities</h2>
         <ul>
@@ -295,12 +295,12 @@
 
     <!-- Popup for Local Deals -->
     <div id="dealsPopup" class="popup">
-        <button class="close-btn" onclick="closePopup('dealsPopup')">&times;</button>
+        <button class="close-btn" onclick="closePopup('dealsPopup')">-</button>
         <img src="https://img.icons8.com/ios-filled/50/800020/gift.png" alt="Gift Icon" class="icon-top">
         <h2>Local Deals & Discounts</h2>
         <ul>
             <li><button onclick="trackAndOpen('https://bellemarswim.com/', 'Belle Mar Swim - 20% off')" class="link-button">
-                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/swimsuit.png" class="icon">
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/swimwear.png" class="icon">
                 20% off Swimsuits at Belle Mar Swim
             </button></li>
             <li><button onclick="trackAndOpen('https://www.theworkshopwb.com/', 'The Workshop - Buy 1 Get 1 Free Coffee')" class="link-button">
@@ -315,13 +315,13 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup')">
+    <button id="exploreNearbyButton" class="button" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup', 'localDealsButton', 'dealsPopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> 
         <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button" onclick="handleButtonClick('localDealsButton', 'dealsPopup')">
+    <button id="localDealsButton" class="button" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
         <span class="text">Local Deals</span>
     </button>
@@ -356,9 +356,17 @@
             }, 9000);
         }
 
-        function handleButtonClick(buttonId, popupId) {
+        function handleButtonClick(buttonId, popupId, otherButtonId, otherPopupId) {
             var button = document.getElementById(buttonId);
             var popup = document.getElementById(popupId);
+            var otherButton = document.getElementById(otherButtonId);
+            var otherPopup = document.getElementById(otherPopupId);
+
+            // Close the other button and popup if open
+            if (!otherButton.classList.contains('shrunk')) {
+                otherButton.classList.add('shrunk');
+                togglePopup(otherPopup, false);
+            }
 
             // Toggle button expansion and show/hide popup
             if (button.classList.contains('shrunk')) {
