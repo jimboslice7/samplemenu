@@ -287,13 +287,13 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('explorePopup')">
+    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> 
         <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('dealsPopup')">
+    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
         <span class="text">Local Deals</span>
     </button>
@@ -332,24 +332,45 @@
             }, 9000);
         }
 
-        function handleButtonClick(popupId) {
-            // Collapse any open popups
-            closeAllPopups();
-
-            // Show the corresponding popup
+        function handleButtonClick(buttonId, popupId) {
+            // Get button and corresponding popup
+            var button = document.getElementById(buttonId);
             var popup = document.getElementById(popupId);
-            popup.classList.add('visible');
+
+            // If button is shrunk, expand and show popup, else collapse and hide popup
+            if (button.classList.contains('shrunk')) {
+                button.classList.remove('shrunk');
+                togglePopup(popupId, true);
+            } else {
+                button.classList.add('shrunk');
+                togglePopup(popupId, false);
+            }
         }
 
-        function closeAllPopups() {
-            var popups = document.querySelectorAll('.popup');
-            popups.forEach(function(popup) {
+        function togglePopup(popupId, show) {
+            var popup = document.getElementById(popupId);
+            if (show) {
+                popup.classList.add('visible');
+                // Close the popup if user clicks outside of it
+                document.addEventListener('click', function(event) {
+                    if (!popup.contains(event.target) && !event.target.classList.contains('button') && !popup.contains(event.target)) {
+                        closePopup(popupId);
+                    }
+                }, { once: true });
+            } else {
                 popup.classList.remove('visible');
-            });
+            }
         }
 
         function closePopup(popupId) {
-            document.getElementById(popupId).classList.remove('visible');
+            var popup = document.getElementById(popupId);
+            popup.classList.remove('visible');
+            // Collapse the associated button
+            if (popupId === 'explorePopup') {
+                document.getElementById('exploreNearbyButton').classList.add('shrunk');
+            } else if (popupId === 'dealsPopup') {
+                document.getElementById('localDealsButton').classList.add('shrunk');
+            }
         }
 
         function trackAndOpen(url, label) {
