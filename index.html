@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Brunch Menu Sample</title>
     
     <!-- Open Graph Metadata for NFC Popup -->
@@ -133,8 +133,8 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 60%; /* Reduced width */
-            max-width: 230px; /* Shrunk max width for better fit */
+            width: 60%;
+            max-width: 230px;
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -180,7 +180,8 @@
         }
 
         .link-button {
-            display: block;
+            display: flex; /* Adjusted to include icons */
+            align-items: center;
             width: 100%;
             padding: 15px;
             background-color: #D2B48C;
@@ -193,6 +194,37 @@
             font-size: 16px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: left;
+            transition: transform 0.2s ease-in-out; /* Bounce effect */
+        }
+
+        .link-button:active {
+            transform: scale(1.05); /* Slight bounce effect */
+        }
+
+        /* Close Button for Popups */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            color: #800020;
+            cursor: pointer;
+        }
+
+        /* Reset Zoom Button */
+        #resetZoom {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            z-index: 25;
         }
 
         /* Responsive Adjustments */
@@ -227,25 +259,48 @@
     <!-- Advertisement section that pops up initially -->
     <div id="ad">SPECIAL OFFER: 10% OFF MIMOSA FLIGHTS!</div>
 
+    <!-- Reset Zoom Button -->
+    <button id="resetZoom">🔍</button>
+
     <!-- Popup for Explore Nearby -->
     <div id="explorePopup" class="popup">
+        <button class="close-btn" onclick="closePopup('explorePopup')">&times;</button>
         <img src="https://img.icons8.com/ios-filled/50/800020/marker.png" alt="Location Icon" class="icon-top">
         <h2>Upcoming Events & Activities</h2>
         <ul>
-            <li><button onclick="trackAndOpen('https://www.cameronartmuseum.org/', 'Cameron Art Museum - Jazz Music')" class="link-button">10/19: Jazz Music at Cameron Art Museum at 8PM</button></li>
-            <li><button onclick="trackAndOpen('https://www.wilmingtonandbeaches.com/event/be-salty%3A-crystal-pier-yoga/7674/', 'Crystal Pier Yoga')" class="link-button">10/20: Crystal Pier Sunrise Yoga at 5AM</button></li>
-            <li><button onclick="trackAndOpen('https://www.thewilmingtonfarmersmarket.com/', 'Wrightsville Beach Farmers Market')" class="link-button">10/21: Wrightsville Beach Farmers Market from 9AM - 1PM</button></li>
+            <li><button onclick="trackAndOpen('https://www.cameronartmuseum.org/', 'Cameron Art Museum - Jazz Music')" class="link-button">
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/saxophone.png" class="icon">
+                10/19: Jazz Music at Cameron Art Museum at 8PM
+            </button></li>
+            <li><button onclick="trackAndOpen('https://www.wilmingtonandbeaches.com/event/be-salty%3A-crystal-pier-yoga/7674/', 'Crystal Pier Yoga')" class="link-button">
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/sunrise.png" class="icon">
+                10/20: Crystal Pier Sunrise Yoga at 5AM
+            </button></li>
+            <li><button onclick="trackAndOpen('https://www.thewilmingtonfarmersmarket.com/', 'Wrightsville Beach Farmers Market')" class="link-button">
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/apple.png" class="icon">
+                10/21: Wrightsville Beach Farmers Market from 9AM - 1PM
+            </button></li>
         </ul>
     </div>
 
     <!-- Popup for Local Deals -->
     <div id="dealsPopup" class="popup">
+        <button class="close-btn" onclick="closePopup('dealsPopup')">&times;</button>
         <img src="https://img.icons8.com/ios-filled/50/800020/gift.png" alt="Gift Icon" class="icon-top">
         <h2>Local Deals & Discounts</h2>
         <ul>
-            <li><button onclick="trackAndOpen('https://bellemarswim.com/', 'Belle Mar Swim - 20% off')" class="link-button">Belle Mar Swim: 20% off Swimsuits</button></li>
-            <li><button onclick="trackAndOpen('https://www.theworkshopwb.com/', 'The Workshop - Buy 1 Get 1 Free Coffee')" class="link-button">The Workshop: Buy 1 Get 1 Free Coffee</button></li>
-            <li><button onclick="trackAndOpen('https://www.shopziaboutique.com/', 'Zia Boutique - 10% off Sweaters')" class="link-button">Zia: 10% off Sweaters</button></li>
+            <li><button onclick="trackAndOpen('https://bellemarswim.com/', 'Belle Mar Swim - 20% off')" class="link-button">
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/swimsuit.png" class="icon">
+                20% off Swimsuits at Belle Mar Swim
+            </button></li>
+            <li><button onclick="trackAndOpen('https://www.theworkshopwb.com/', 'The Workshop - Buy 1 Get 1 Free Coffee')" class="link-button">
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/coffee.png" class="icon">
+                Buy 1 Get 1 Free Coffee at the Workshop
+            </button></li>
+            <li><button onclick="trackAndOpen('https://www.shopziaboutique.com/', 'Zia Boutique - 10% off Sweaters')" class="link-button">
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/t-shirt.png" class="icon">
+                10% off Sweaters at Zia
+            </button></li>
         </ul>
     </div>
 
@@ -323,9 +378,18 @@
             var popup = document.getElementById(popupId);
             if (show) {
                 popup.classList.add('visible');
+                document.addEventListener('click', function(event) {
+                    if (!popup.contains(event.target)) {
+                        closePopup(popupId);
+                    }
+                });
             } else {
                 popup.classList.remove('visible');
             }
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).classList.remove('visible');
         }
 
         function trackAndOpen(url, label) {
@@ -340,6 +404,11 @@
                 window.open(url, '_blank');
             }, 300);
         }
+
+        // Reset zoom functionality
+        document.getElementById('resetZoom').addEventListener('click', function() {
+            document.body.style.zoom = "100%";
+        });
     </script>
 </body>
 </html>
