@@ -315,13 +315,13 @@
     </div>
 
     <!-- Button to reveal nearby activities -->
-    <button id="exploreNearbyButton" class="button disabled" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup')">
+    <button id="exploreNearbyButton" class="button" onclick="handleButtonClick('exploreNearbyButton', 'explorePopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/marker.png" alt="Location Pin" class="icon"> 
         <span class="text">Explore Nearby</span>
     </button>
 
     <!-- Button to reveal local deals -->
-    <button id="localDealsButton" class="button disabled" onclick="handleButtonClick('localDealsButton', 'dealsPopup')">
+    <button id="localDealsButton" class="button" onclick="handleButtonClick('localDealsButton', 'dealsPopup')">
         <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
         <span class="text">Local Deals</span>
     </button>
@@ -349,13 +349,9 @@
             // After 3 more seconds, shrink buttons to corners, and enable them
             setTimeout(function() {
                 exploreNearbyButton.classList.add('shrunk');
-                exploreNearbyButton.style.left = '10px';
-                exploreNearbyButton.style.bottom = '10px';
                 exploreNearbyButton.classList.remove('disabled');
                 
                 localDealsButton.classList.add('shrunk');
-                localDealsButton.style.right = '10px';
-                localDealsButton.style.bottom = '10px';
                 localDealsButton.classList.remove('disabled');
             }, 9000);
         }
@@ -380,7 +376,7 @@
                 popup.classList.add('visible');
                 // Allow closing the popup when clicking outside
                 document.addEventListener('click', function(event) {
-                    if (!popup.contains(event.target) && !event.target.classList.contains('button') && !popup.contains(event.target)) {
+                    if (!popup.contains(event.target) && !event.target.closest('.button')) {
                         closePopup(popupId);
                     }
                 }, { once: true });
