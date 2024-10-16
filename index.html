@@ -36,7 +36,7 @@
 
         /* Ensure image scales properly */
         #menu-image {
-            max-width: 70%;
+            max-width: 90%;
             height: auto;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -87,7 +87,7 @@
         .button.shrunk {
             width: 60px;
             height: 60px;
-            padding: 20px;
+            padding: 15px;
             justify-content: center;
             border-radius: 50%;
         }
@@ -133,7 +133,7 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 80%;
+            width: 85%;
             max-width: 300px;
             background-color: #fffaf0;
             color: #800020;
@@ -230,6 +230,34 @@
             background-size: cover;
             width: 50px;
             height: 50px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .button {
+                width: 180px;
+                height: 55px;
+                font-size: 18px;
+            }
+
+            .button.shrunk {
+                width: 50px;
+                height: 50px;
+            }
+
+            #exploreNearbyButton, #localDealsButton {
+                bottom: 10px;
+            }
+
+            .popup {
+                width: 90%;
+                max-width: none;
+            }
+
+            #menu-image {
+                max-width: 90%;
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -333,11 +361,10 @@
         }
 
         function handleButtonClick(buttonId, popupId) {
-            // Get button and corresponding popup
             var button = document.getElementById(buttonId);
             var popup = document.getElementById(popupId);
 
-            // If button is shrunk, expand and show popup, else collapse and hide popup
+            // Toggle button expansion and show/hide popup
             if (button.classList.contains('shrunk')) {
                 button.classList.remove('shrunk');
                 togglePopup(popupId, true);
@@ -351,7 +378,7 @@
             var popup = document.getElementById(popupId);
             if (show) {
                 popup.classList.add('visible');
-                // Close the popup if user clicks outside of it
+                // Allow closing the popup when clicking outside
                 document.addEventListener('click', function(event) {
                     if (!popup.contains(event.target) && !event.target.classList.contains('button') && !popup.contains(event.target)) {
                         closePopup(popupId);
