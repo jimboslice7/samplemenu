@@ -322,6 +322,8 @@
     </button>
 
     <script>
+        let activePopup = null;
+
         window.onload = function() {
             var ad = document.getElementById('ad');
             var exploreNearbyButton = document.getElementById('exploreNearbyButton');
@@ -358,26 +360,18 @@
             var otherPopup = document.getElementById(otherPopupId);
 
             // Close the other button and popup if open
-            if (!otherButton.classList.contains('shrunk')) {
+            if (!otherButton.classList.contains('shrunk') || otherPopup.classList.contains('visible')) {
                 otherButton.classList.add('shrunk');
-                togglePopup(otherPopup, false);
+                otherPopup.classList.remove('visible');
             }
 
             // Toggle button expansion and show/hide popup
             if (button.classList.contains('shrunk')) {
                 button.classList.remove('shrunk');
-                togglePopup(popupId, true);
+                popup.classList.add('visible');
+                activePopup = popupId; // Track active popup
             } else {
                 button.classList.add('shrunk');
-                togglePopup(popupId, false);
-            }
-        }
-
-        function togglePopup(popupId, show) {
-            var popup = document.getElementById(popupId);
-            if (show) {
-                popup.classList.add('visible');
-            } else {
                 popup.classList.remove('visible');
             }
         }
