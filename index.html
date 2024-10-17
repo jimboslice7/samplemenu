@@ -209,22 +209,6 @@
             cursor: pointer;
         }
 
-        /* Reset Zoom Button */
-        #resetZoom {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            padding: 8px;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            z-index: 25;
-            width: 40px;
-            height: 40px; /* Shrunk magnifying glass size */
-        }
-
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .button {
@@ -261,11 +245,6 @@
 
     <!-- Advertisement section that pops up initially -->
     <div id="ad">SPECIAL OFFER: 10% OFF MIMOSA FLIGHTS!</div>
-
-    <!-- Reset Zoom Button -->
-    <button id="resetZoom">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/search--v1.png" alt="Zoom Out" style="width: 100%; height: 100%; object-fit: contain;">
-    </button>
 
     <!-- Popup for Explore Nearby -->
     <div id="explorePopup" class="popup">
@@ -399,11 +378,6 @@
                 window.open(url, '_blank');
             }, 300);
         }
-
-        // Reset zoom functionality
-        document.getElementById('resetZoom').addEventListener('click', function() {
-            document.body.style.zoom = "100%";
-        });
     </script>
 </body>
 </html>
