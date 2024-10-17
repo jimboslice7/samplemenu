@@ -74,9 +74,9 @@
             font-weight: bold;
             z-index: 20;
             transition: opacity 1s ease-in-out, width 0.5s ease, height 0.5s ease;
-            width: 230px;
+            width: 220px;
             height: 60px;
-            padding: 22px 28px;
+            padding: 20px 25px;
             white-space: nowrap;
         }
 
@@ -85,9 +85,9 @@
         }
 
         .button.shrunk {
-            width: 65px;
-            height: 65px;
-            padding: 18px;
+            width: 60px;
+            height: 60px;
+            padding: 15px;
             justify-content: center;
             border-radius: 50%;
         }
@@ -118,9 +118,9 @@
         }
 
         .icon {
-            width: 35px;
-            height: 35px;
-            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
         }
 
         .button.shrunk .icon {
@@ -133,8 +133,8 @@
             bottom: -100%;
             left: 50%;
             transform: translate(-50%, 100%);
-            width: 75%; /* Adjusted for better fit */
-            max-width: 220px;
+            width: 85%;
+            max-width: 260px;
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -201,11 +201,10 @@
         .close-btn {
             position: absolute;
             top: 10px;
-            right: 0px; /* Move the minus sign further right */
-            margin-right: 5px;
+            right: 20px; /* Moved greatly to the right */
             background-color: transparent;
             border: none;
-            font-size: 30px;
+            font-size: 24px;
             color: #800020;
             cursor: pointer;
         }
@@ -222,8 +221,8 @@
             color: white;
             cursor: pointer;
             z-index: 25;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px; /* Shrunk magnifying glass size */
         }
 
         /* Responsive Adjustments */
@@ -235,8 +234,8 @@
             }
 
             .button.shrunk {
-                width: 55px;
-                height: 55px;
+                width: 50px;
+                height: 50px;
             }
 
             #exploreNearbyButton, #localDealsButton {
@@ -244,7 +243,7 @@
             }
 
             .popup {
-                width: 85%;
+                width: 90%;
                 max-width: none;
             }
 
@@ -292,11 +291,11 @@
     <!-- Popup for Local Deals -->
     <div id="dealsPopup" class="popup">
         <button class="close-btn" onclick="closePopup('dealsPopup')">-</button>
-        <img src="https://img.icons8.com/ios-filled/50/800020/gift.png" alt="Gift Icon" class="icon-top">
+        <img src="https://img.icons8.com/ios-filled/50/800020/shopping-bag.png" alt="Shopping Bag Icon" class="icon-top"> <!-- Changed to shopping bag icon -->
         <h2>Local Deals & Discounts</h2>
         <ul>
             <li><button onclick="trackAndOpen('https://bellemarswim.com/', 'Belle Mar Swim - 20% off')" class="link-button">
-                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/beach.png" class="icon"> <!-- Changed icon -->
+                <img src="https://img.icons8.com/ios-filled/24/FFFFFF/swimsuit.png" class="icon">
                 Belle Mar Swim: 20% off Swimsuits
             </button></li>
             <li><button onclick="trackAndOpen('https://www.theworkshopwb.com/', 'The Workshop - Buy 1 Get 1 Free Coffee')" class="link-button">
@@ -318,7 +317,7 @@
 
     <!-- Button to reveal local deals -->
     <button id="localDealsButton" class="button" onclick="handleButtonClick('localDealsButton', 'dealsPopup', 'exploreNearbyButton', 'explorePopup')">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/gift.png" alt="Gift" class="icon">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/shopping-bag.png" alt="Shopping Bag" class="icon"> <!-- Changed to shopping bag icon -->
         <span class="text">Local Deals</span>
     </button>
 
