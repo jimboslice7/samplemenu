@@ -74,9 +74,9 @@
             font-weight: bold;
             z-index: 20;
             transition: opacity 1s ease-in-out, width 0.5s ease, height 0.5s ease;
-            width: 230px; /* Increased width for text buttons */
+            width: 230px;
             height: 60px;
-            padding: 22px 28px; /* Increased padding */
+            padding: 22px 28px;
             white-space: nowrap;
         }
 
@@ -85,9 +85,9 @@
         }
 
         .button.shrunk {
-            width: 65px; /* Increased circular button size */
+            width: 65px;
             height: 65px;
-            padding: 18px; /* Increased padding for the circular icon button */
+            padding: 18px;
             justify-content: center;
             border-radius: 50%;
         }
@@ -118,9 +118,9 @@
         }
 
         .icon {
-            width: 35px; /* Slightly larger icon */
+            width: 35px;
             height: 35px;
-            margin-right: 10px; /* Increased space between icon and text */
+            margin-right: 10px;
         }
 
         .button.shrunk .icon {
@@ -134,7 +134,7 @@
             left: 50%;
             transform: translate(-50%, 100%);
             width: 85%;
-            max-width: 250px; /* Slightly reduced width */
+            max-width: 250px;
             background-color: #fffaf0;
             color: #800020;
             border: 3px solid #800020;
@@ -202,9 +202,10 @@
             position: absolute;
             top: 10px;
             right: 10px;
+            transform: translate(0, 0); /* Proper placement in the top-right corner */
             background-color: transparent;
             border: none;
-            font-size: 30px; /* Increased size of minus sign */
+            font-size: 30px;
             color: #800020;
             cursor: pointer;
         }
@@ -216,13 +217,13 @@
             right: 10px;
             background-color: rgba(0, 0, 0, 0.5);
             border: none;
-            padding: 8px; /* Reduced padding for smaller size */
+            padding: 8px;
             border-radius: 50%;
             color: white;
             cursor: pointer;
             z-index: 25;
-            width: 45px; /* Reduced width */
-            height: 45px; /* Reduced height */
+            width: 45px;
+            height: 45px;
         }
 
         /* Responsive Adjustments */
